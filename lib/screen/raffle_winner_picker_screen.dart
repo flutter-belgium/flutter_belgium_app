@@ -78,9 +78,9 @@ class RaffleWinnerPickerScreen extends StatelessWidget {
                                         FortuneItem(
                                           child: Text(
                                             participant.name,
-                                            style: const TextStyle(
+                                            style: TextStyle(
                                               color: ThemeColors.primary,
-                                              fontSize: 24,
+                                              fontSize: viewModel.participants.length > 30 ? 16 : 24,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),

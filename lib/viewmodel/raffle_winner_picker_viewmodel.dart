@@ -47,9 +47,7 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
     _subscription = raffleRepository.getRaffle().listen((raffle) {
       final winnerIds = raffle?.winners.map((e) => e.userUid) ?? [];
       final participants = List<RaffleParticipant>.of(raffle?.participants ?? []);
-      if (!kDebugMode) {
-        participants.removeWhere((element) => winnerIds.contains(element.userUid));
-      }
+      participants.removeWhere((element) => winnerIds.contains(element.userUid));
       _allowedParticipants = participants;
       _raffle = raffle;
       notifyListeners();
@@ -78,7 +76,6 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
     _lockedParticipants = participants;
     notifyListeners();
     final winnerIndex = Random().nextInt(participants.length);
-    print('winnerIndex: $winnerIndex');
     final winner = participants[winnerIndex];
     _selectedIndexStreamController.add(winnerIndex);
     await Future.delayed(ThemeDuration.raffleWheelDuration);

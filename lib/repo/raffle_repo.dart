@@ -88,6 +88,6 @@ class _RaffleRepository implements RaffleRepository {
 
   @override
   Future<void> setWinner({required String raffleId, required RaffleParticipant winner}) async {
-    await _firebaseFirestore.collection('raffle').doc(raffleId).collection('winners').doc(_loginRepository.userId).set(winner.toRaffleWinner().toJson());
+    await _firebaseFirestore.collection('raffle').doc(raffleId).collection('winners').doc(winner.userUid).set(winner.toRaffleWinner().toJson());
   }
 }
