@@ -8,8 +8,12 @@
 import 'package:flutter/material.dart' as _i1;
 import 'package:flutter/material.dart';
 
-import '../screen/home_screen.dart';
 import '../screen/login_screen.dart';
+import '../screen/qr_scanner_screen.dart';
+import '../screen/raffle_screen.dart';
+import '../screen/raffle_winner_picker_screen.dart';
+import '../screen/splash_screen.dart';
+import 'page_route/no_transition_page_route.dart';
 
 mixin BaseNavigator {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -17,16 +21,40 @@ mixin BaseNavigator {
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RouteNames.loginScreen:
-        return MaterialPageRoute<void>(
+        return NoTransitionPageRoute<void>(
           builder: (_) => LoginScreen(
             key: (settings.arguments as Map<String, dynamic>?)?['key'] as Key?,
           ),
           settings: settings,
           fullscreenDialog: false,
         );
-      case RouteNames.homeScreen:
-        return MaterialPageRoute<void>(
-          builder: (_) => HomeScreen(
+      case RouteNames.raffleWinnerPickerScreen:
+        return NoTransitionPageRoute<void>(
+          builder: (_) => RaffleWinnerPickerScreen(
+            key: (settings.arguments as Map<String, dynamic>?)?['key'] as Key?,
+          ),
+          settings: settings,
+          fullscreenDialog: false,
+        );
+      case RouteNames.qrScannerScreen:
+        return NoTransitionPageRoute<void>(
+          builder: (_) => QrScannerScreen(
+            key: (settings.arguments as Map<String, dynamic>?)?['key'] as Key?,
+          ),
+          settings: settings,
+          fullscreenDialog: false,
+        );
+      case RouteNames.raffleScreen:
+        return NoTransitionPageRoute<void>(
+          builder: (_) => RaffleScreen(
+            key: (settings.arguments as Map<String, dynamic>?)?['key'] as Key?,
+          ),
+          settings: settings,
+          fullscreenDialog: false,
+        );
+      case RouteNames.splashScreen:
+        return NoTransitionPageRoute<void>(
+          builder: (_) => SplashScreen(
             key: (settings.arguments as Map<String, dynamic>?)?['key'] as Key?,
           ),
           settings: settings,
@@ -42,9 +70,26 @@ mixin BaseNavigator {
         (_) => false,
         arguments: {'key': key},
       );
-  void goToHomeScreen({_i1.Key? key}) =>
+  Future<void> goToRaffleWinnerPickerScreen({_i1.Key? key}) async =>
+      navigatorKey.currentState?.pushNamed<dynamic>(
+        RouteNames.raffleWinnerPickerScreen,
+        arguments: {'key': key},
+      );
+  void goToQrScannerScreen({_i1.Key? key}) =>
       navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
-        RouteNames.homeScreen,
+        RouteNames.qrScannerScreen,
+        (_) => false,
+        arguments: {'key': key},
+      );
+  void goToRaffleScreen({_i1.Key? key}) =>
+      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+        RouteNames.raffleScreen,
+        (_) => false,
+        arguments: {'key': key},
+      );
+  void goToSplashScreen({_i1.Key? key}) =>
+      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+        RouteNames.splashScreen,
         (_) => false,
         arguments: {'key': key},
       );
@@ -69,5 +114,11 @@ mixin BaseNavigator {
 class RouteNames {
   static const loginScreen = '/login';
 
-  static const homeScreen = '/home';
+  static const raffleWinnerPickerScreen = '/raffle-winner-picker';
+
+  static const qrScannerScreen = '/qr-scanner';
+
+  static const raffleScreen = '/raffle';
+
+  static const splashScreen = '/splash';
 }

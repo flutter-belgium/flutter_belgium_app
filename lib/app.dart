@@ -14,10 +14,6 @@ class MyApp extends StatelessWidget {
       create: () => getIt(),
       builder: (context, viewModel) => MaterialApp(
         title: 'Flutter Belgium',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-          useMaterial3: true,
-        ),
         navigatorKey: viewModel.mainNavigator.navigatorKey,
         initialRoute: viewModel.mainNavigator.initialRoute,
         navigatorObservers: viewModel.mainNavigator.navigatorObservers,

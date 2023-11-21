@@ -45,3 +45,6 @@ app.*.map.json
 
 # FVM
 .fvm/flutter_sdk
+
+# Firebase 
+lib/firebase_options.dart

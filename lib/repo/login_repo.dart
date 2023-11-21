@@ -1,30 +1,67 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_belgium/model/data/login/login_type.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
 abstract class LoginRepository {
   @factoryMethod
-  factory LoginRepository() => LoginRepositoryImpl();
+  factory LoginRepository(
+    FirebaseAuth firebaseAuth,
+  ) = _LoginRepository;
 
   bool get isLoggedIn;
 
-  Future<void> login();
+  String? get userId;
+
+  String? get userName;
+
+  Future<void> init();
+
+  Future<void> login(LoginType loginType);
 
   Future<void> logout();
 }
 
-class LoginRepositoryImpl implements LoginRepository {
-  var _isLoggedIn = false;
+class _LoginRepository implements LoginRepository {
+  final FirebaseAuth _firebaseAuth;
+  User? _user;
+
+  _LoginRepository(
+    this._firebaseAuth,
+  );
 
   @override
-  bool get isLoggedIn => _isLoggedIn;
+  Future<void> init() async {
+    _firebaseAuth.userChanges().listen((User? user) {
+      _user = user;
+    });
+  }
 
   @override
-  Future<void> login() async {
-    _isLoggedIn = true;
+  bool get isLoggedIn => _user != null;
+
+  @override
+  String? get userId => _user?.uid;
+
+  @override
+  String? get userName => _user?.displayName;
+
+  @override
+  Future<void> login(LoginType loginType) async {
+    AuthProvider authProvider;
+    switch (loginType) {
+      case LoginType.github:
+        authProvider = GithubAuthProvider();
+        break;
+      case LoginType.google:
+        authProvider = GoogleAuthProvider();
+        break;
+    }
+    await _firebaseAuth.signInWithPopup(authProvider);
   }
 
   @override
   Future<void> logout() async {
-    _isLoggedIn = false;
+    _firebaseAuth.signOut();
   }
 }

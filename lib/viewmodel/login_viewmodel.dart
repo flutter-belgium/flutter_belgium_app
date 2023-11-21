@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_belgium/model/data/login/login_type.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_belgium/navigation/main_navigator.dart';
 import 'package:flutter_belgium/repo/login_repo.dart';
@@ -19,12 +20,17 @@ class LoginViewModel with ChangeNotifier {
 
   void init() {}
 
-  Future<void> onLoginTapped() async {
-    _isLoading = true;
-    notifyListeners();
-    await _loginRepository.login();
-    _isLoading = false;
-    notifyListeners();
-    _mainNavigator.goToHomeScreen();
+  Future<void> onLoginTapped(LoginType loginType) async {
+    try {
+      _isLoading = true;
+      notifyListeners();
+      await _loginRepository.login(loginType);
+      _isLoading = false;
+      notifyListeners();
+      _mainNavigator.goToRaffleScreen();
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 }
