@@ -16,15 +16,19 @@ class RaffleViewModel with ChangeNotifier {
   final MainNavigator _mainNavigator;
 
   final _confettiController = ConfettiController();
-  Timer? _confettiTimer;
-  StreamSubscription<Raffle?>? _subscription;
+
   Raffle? _raffle;
-  var _isLoading = false;
   bool? _hasAlreadyWonRaffle;
+  bool? _hasEnteredRaffle;
+
+  StreamSubscription<Raffle?>? _raffleSubscription;
+  StreamSubscription<bool>? _hasEnteredStreamSubscription;
+  StreamSubscription<bool>? _hasAlreadyWonStreamSubscription;
+  Timer? _confettiTimer;
 
   String get user => _loginRepository.userName ?? '';
 
-  bool get isLoading => _isLoading;
+  bool get isLoading => _raffle == null || _hasAlreadyWonRaffle == null || _hasEnteredRaffle == null;
 
   Raffle? get raffle => _raffle;
 
@@ -32,7 +36,7 @@ class RaffleViewModel with ChangeNotifier {
 
   bool get hasRaffle => _raffle != null && _raffle!.active;
 
-  bool get hasEnteredRaffle => _raffle?.participants.where((element) => element.userUid == _loginRepository.userId).isNotEmpty ?? false;
+  bool get hasEnteredRaffle => _hasEnteredRaffle ?? false;
 
   bool get hasAlreadyWonRaffle => _hasAlreadyWonRaffle ?? false;
 
@@ -50,7 +54,8 @@ class RaffleViewModel with ChangeNotifier {
   void dispose() {
     _confettiTimer?.cancel();
     _confettiController.dispose();
-    _subscription?.cancel();
+    _raffleSubscription?.cancel();
+    _hasEnteredStreamSubscription?.cancel();
     super.dispose();
   }
 
@@ -60,12 +65,23 @@ class RaffleViewModel with ChangeNotifier {
   }
 
   Future<void> _getData() async {
-    _isLoading = true;
-    notifyListeners();
-    _subscription?.cancel();
-    _subscription = _raffleRepository.getRaffle().listen((raffle) {
-      _isLoading = false;
-      final hasWonRaffle = raffle?.winners.where((element) => element.userUid == _loginRepository.userId).isNotEmpty ?? false;
+    _raffleSubscription?.cancel();
+    _raffleSubscription = _raffleRepository.getRaffle().listen((raffle) {
+      if (raffle == null) return;
+      _raffle = raffle;
+      notifyListeners();
+      _setupRaffleSpecificStreams(raffle.id);
+    });
+  }
+
+  void _setupRaffleSpecificStreams(String raffleId) {
+    _hasEnteredStreamSubscription?.cancel();
+    _hasEnteredStreamSubscription = _raffleRepository.hasEnteredRaffle(raffleId).listen((hasEnteredRaffle) {
+      _hasEnteredRaffle = hasEnteredRaffle;
+      notifyListeners();
+    });
+    _hasAlreadyWonStreamSubscription?.cancel();
+    _hasAlreadyWonStreamSubscription = _raffleRepository.hasWonRaffle(raffleId).listen((hasWonRaffle) {
       if (_hasAlreadyWonRaffle == false) {
         if (hasWonRaffle) {
           _confettiTimer?.cancel();
@@ -74,7 +90,6 @@ class RaffleViewModel with ChangeNotifier {
         }
       }
       _hasAlreadyWonRaffle = hasWonRaffle;
-      _raffle = raffle;
       notifyListeners();
     });
   }

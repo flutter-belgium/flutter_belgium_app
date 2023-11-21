@@ -24,6 +24,10 @@ abstract class RaffleRepository {
 
   Future<void> enterRaffle(String raffleId);
 
+  Stream<bool> hasEnteredRaffle(String raffleId);
+
+  Stream<bool> hasWonRaffle(String raffleId);
+
   void setWinner({
     required String raffleId,
     required RaffleParticipant winner,
@@ -54,8 +58,8 @@ class _RaffleRepository implements RaffleRepository {
     final winnersStream = raffleDoc.collection('winners').snapshots().map((snapshot) => snapshot.docs.onlyMapWithoutException((doc) => RaffleWinner.fromMap(doc)));
     return Rx.combineLatest3(
       raffleDoc.snapshots(),
-      participantsStream,
-      winnersStream,
+      participantsStream.onErrorReturn([]),
+      winnersStream.onErrorReturn([]),
       (raffle, participants, winners) => Raffle(
         id: docId,
         active: raffle.data()?['active'] ?? false,
@@ -87,7 +91,14 @@ class _RaffleRepository implements RaffleRepository {
   }
 
   @override
-  Future<void> setWinner({required String raffleId, required RaffleParticipant winner}) async {
-    await _firebaseFirestore.collection('raffle').doc(raffleId).collection('winners').doc(winner.userUid).set(winner.toRaffleWinner().toJson());
-  }
+  Stream<bool> hasEnteredRaffle(String raffleId) =>
+      _firebaseFirestore.collection('raffle').doc(raffleId).collection('participants').doc(_loginRepository.userId).snapshots().map((event) => event.exists);
+
+  @override
+  Future<void> setWinner({required String raffleId, required RaffleParticipant winner}) =>
+      _firebaseFirestore.collection('raffle').doc(raffleId).collection('winners').doc(winner.userUid).set(winner.toRaffleWinner().toJson());
+
+  @override
+  Stream<bool> hasWonRaffle(String raffleId) =>
+      _firebaseFirestore.collection('raffle').doc(raffleId).collection('winners').doc(_loginRepository.userId).snapshots().map((event) => event.exists);
 }
