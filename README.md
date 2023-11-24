@@ -1,16 +1,16 @@
-# flutter_belgium
+# Flutter Belgium App
 
-A new Flutter project.
+Bringing communities together is what we do best. We are a group of Flutter enthusiasts who want to share our knowledge and passion for Flutter with the Belgian community. We organize meetups. We are open to everyone who wants to learn more about Flutter and Dart.
 
-## Getting Started
+## The app
 
-This project is a starting point for a Flutter application.
+This app has 2 functions (as of now):
 
-A few resources to get you started if this is your first Flutter project:
+- Enter raffle to win goodies (during meetups)
+- Pick the raffle winner (during meetups)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Backlog
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Release to the app stores (Android & iOS)
+- Extra social logins (Google Apple)
+- Push notifications
