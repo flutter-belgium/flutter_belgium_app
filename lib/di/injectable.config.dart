@@ -56,7 +56,10 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i7.MainNavigator>(),
         ));
     gh.factory<_i11.RaffleWinnerPickerViewModel>(
-        () => _i11.RaffleWinnerPickerViewModel(gh<_i9.RaffleRepository>()));
+        () => _i11.RaffleWinnerPickerViewModel(
+              gh<_i9.RaffleRepository>(),
+              gh<_i7.MainNavigator>(),
+            ));
     gh.factory<_i12.SplashViewModel>(() => _i12.SplashViewModel(
           gh<_i6.LoginRepository>(),
           gh<_i7.MainNavigator>(),

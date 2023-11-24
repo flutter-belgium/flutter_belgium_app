@@ -5,13 +5,15 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/model/data/raffle/participant.dart';
 import 'package:flutter_belgium/model/data/raffle/raffle.dart';
+import 'package:flutter_belgium/navigation/main_navigator.dart';
 import 'package:flutter_belgium/repo/raffle_repo.dart';
 import 'package:flutter_belgium/style/theme_duration.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class RaffleWinnerPickerViewModel with ChangeNotifier {
-  final RaffleRepository raffleRepository;
+  final RaffleRepository _raffleRepository;
+  final MainNavigator _mainNavigator;
 
   final _confettiController = ConfettiController();
   final _selectedIndexStreamController = StreamController<int>.broadcast();
@@ -39,12 +41,13 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
   bool get hasEnoughParticipants => participants.length > 2;
 
   RaffleWinnerPickerViewModel(
-    this.raffleRepository,
+    this._raffleRepository,
+    this._mainNavigator,
   );
 
   void init() {
     _subscription?.cancel();
-    _subscription = raffleRepository.getRaffle().listen((raffle) {
+    _subscription = _raffleRepository.getRaffle().listen((raffle) {
       final winnerIds = raffle?.winners.map((e) => e.userUid) ?? [];
       final participants = List<RaffleParticipant>.of(raffle?.participants ?? []);
       participants.removeWhere((element) => winnerIds.contains(element.userUid));
@@ -64,12 +67,12 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
   Future<void> onPickWinnerTapped() async {
     final raffleId = _raffle?.id;
     if (raffleId == null) {
-      //todo show error
+      _mainNavigator.showError('Failed to pick winner');
       return;
     }
     final participants = List<RaffleParticipant>.of(_allowedParticipants);
     if (participants.isEmpty) {
-      //todo show error
+      _mainNavigator.showError('No participants found');
       return;
     }
     _winner = null;
@@ -79,7 +82,7 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
     final winner = participants[winnerIndex];
     _selectedIndexStreamController.add(winnerIndex);
     await Future.delayed(ThemeDuration.raffleWheelDuration);
-    raffleRepository.setWinner(raffleId: raffleId, winner: winner);
+    _raffleRepository.setWinner(raffleId: raffleId, winner: winner);
     _winner = winner;
     notifyListeners();
     _confettiController.play();
@@ -94,9 +97,9 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
   Future<void> onMakeRaffleActiveTapped() async {
     final docId = _raffle?.id;
     if (docId == null) {
-      //todo show error
+      _mainNavigator.showError('Failed to make raffle active (no raffle available)');
       return;
     }
-    raffleRepository.setRaffleActive(raffleId: docId, active: true);
+    _raffleRepository.setRaffleActive(raffleId: docId, active: true);
   }
 }

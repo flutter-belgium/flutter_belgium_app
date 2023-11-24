@@ -28,7 +28,8 @@ class LoginViewModel with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
       _mainNavigator.goToRaffleScreen();
-    } catch (e) {
+    } catch (error, trace) {
+      _mainNavigator.showError('Failed to open login', error: error, trace: trace);
       _isLoading = false;
       notifyListeners();
     }

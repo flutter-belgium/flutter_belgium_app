@@ -71,6 +71,8 @@ class RaffleViewModel with ChangeNotifier {
       _raffle = raffle;
       notifyListeners();
       _setupRaffleSpecificStreams(raffle.id);
+    }, onError: (error, trace) {
+      _mainNavigator.showError('Failed to get `getRaffle`', error: error, trace: trace);
     });
   }
 
@@ -79,6 +81,8 @@ class RaffleViewModel with ChangeNotifier {
     _hasEnteredStreamSubscription = _raffleRepository.hasEnteredRaffle(raffleId).listen((hasEnteredRaffle) {
       _hasEnteredRaffle = hasEnteredRaffle;
       notifyListeners();
+    }, onError: (error, trace) {
+      _mainNavigator.showError('Failed to get `hasEnteredRaffle` status ', error: error, trace: trace);
     });
     _hasAlreadyWonStreamSubscription?.cancel();
     _hasAlreadyWonStreamSubscription = _raffleRepository.hasWonRaffle(raffleId).listen((hasWonRaffle) {
@@ -91,17 +95,23 @@ class RaffleViewModel with ChangeNotifier {
       }
       _hasAlreadyWonRaffle = hasWonRaffle;
       notifyListeners();
+    }, onError: (error, trace) {
+      _mainNavigator.showError('Failed to get `hasWonRaffle` status ', error: error, trace: trace);
     });
   }
 
   Future<void> onEnterRaffleTapped() async {
     final raffle = _raffle;
     if (raffle == null) {
-      //TODO show error
+      _mainNavigator.showError('No raffle found');
       return;
     }
     await _raffleRepository.enterRaffle(raffle.id);
   }
 
   void onStartFortuneWheel() => _mainNavigator.goToRaffleWinnerPickerScreen();
+
+  void onTripleTapLogo() {
+    _mainNavigator.showMessage('Raffle: $_raffle, $_hasAlreadyWonRaffle, $_hasEnteredRaffle');
+  }
 }

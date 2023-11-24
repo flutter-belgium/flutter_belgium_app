@@ -4,6 +4,7 @@ import 'package:flutter_belgium/style/theme_assets.dart';
 import 'package:flutter_belgium/widget/admin/shortcut_manager.dart';
 import 'package:flutter_belgium/widget/general/button.dart';
 import 'package:flutter_belgium/widget/general/loading.dart';
+import 'package:flutter_belgium/widget/general/tripple_tap_detector.dart';
 import 'package:flutter_belgium/widget/raffle/custom_confetti.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:flutter_belgium/di/injectable.dart';
@@ -37,8 +38,11 @@ class RaffleScreen extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SvgPicture.asset(
-                              ThemeAssets.flutterBelgiumLogo,
+                            TripleTapDetector(
+                              onTripleTap: viewModel.onTripleTapLogo,
+                              child: SvgPicture.asset(
+                                ThemeAssets.flutterBelgiumLogo,
+                              ),
                             ),
                             const SizedBox(height: 32),
                             RichText(
