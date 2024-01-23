@@ -1,0 +1,1 @@
+class InvalidUserNameError extends Error {}

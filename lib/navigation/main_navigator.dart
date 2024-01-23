@@ -22,6 +22,8 @@ class MainNavigator with BaseNavigator {
   List<NavigatorObserver> get navigatorObservers => _navigatorObservers;
 
   void showError(String title, {Object? error, StackTrace? trace}) {
+    final context = navigatorKey.currentContext;
+    if (context == null) return;
     Flushbar(
       title: title,
       message: error.toString(),
@@ -40,6 +42,8 @@ class MainNavigator with BaseNavigator {
   }
 
   void showMessage(String message) {
+    final context = navigatorKey.currentContext;
+    if (context == null) return;
     Flushbar(
       message: message.toString(),
       icon: const Icon(

@@ -64,48 +64,39 @@ mixin BaseNavigator {
     return null;
   }
 
-  void goToLoginScreen({_i1.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToLoginScreen({_i1.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.loginScreen,
         (_) => false,
         arguments: {'key': key},
       );
-  Future<void> goToRaffleWinnerPickerScreen({_i1.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
+  Future<void> goToRaffleWinnerPickerScreen({_i1.Key? key}) async => navigatorKey.currentState?.pushNamed<dynamic>(
         RouteNames.raffleWinnerPickerScreen,
         arguments: {'key': key},
       );
-  void goToQrScannerScreen({_i1.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToQrScannerScreen({_i1.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.qrScannerScreen,
         (_) => false,
         arguments: {'key': key},
       );
-  void goToRaffleScreen({_i1.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToRaffleScreen({_i1.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.raffleScreen,
         (_) => false,
         arguments: {'key': key},
       );
-  void goToSplashScreen({_i1.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToSplashScreen({_i1.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.splashScreen,
         (_) => false,
         arguments: {'key': key},
       );
   void goBack() => navigatorKey.currentState?.pop();
-  void goBackWithResult<T>({T? result}) =>
-      navigatorKey.currentState?.pop(result);
-  void popUntil(bool Function(Route<dynamic>) predicate) =>
-      navigatorKey.currentState?.popUntil(predicate);
-  void goBackTo(String routeName) =>
-      popUntil((route) => route.settings.name == routeName);
+  void goBackWithResult<T>({T? result}) => navigatorKey.currentState?.pop(result);
+  void popUntil(bool Function(Route<dynamic>) predicate) => navigatorKey.currentState?.popUntil(predicate);
+  void goBackTo(String routeName) => popUntil((route) => route.settings.name == routeName);
   Future<T?> showCustomDialog<T>({Widget? widget}) async => showDialog<T>(
         context: navigatorKey.currentContext!,
         builder: (_) => widget ?? const SizedBox.shrink(),
       );
-  Future<T?> showBottomSheet<T>({Widget? widget}) async =>
-      showModalBottomSheet<T>(
+  Future<T?> showBottomSheet<T>({Widget? widget}) async => showModalBottomSheet<T>(
         context: navigatorKey.currentContext!,
         builder: (_) => widget ?? const SizedBox.shrink(),
       );

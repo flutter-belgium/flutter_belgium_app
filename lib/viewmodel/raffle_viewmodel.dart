@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:confetti/confetti.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_belgium/model/data/raffle/raffle.dart';
 import 'package:flutter_belgium/repo/raffle_repo.dart';
 import 'package:flutter_belgium/style/theme_duration.dart';
@@ -48,7 +48,15 @@ class RaffleViewModel with ChangeNotifier {
     this._mainNavigator,
   );
 
-  void init() => _getData();
+  void init() {
+    if (!_loginRepository.isLoggedIn) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        _mainNavigator.goToLoginScreen();
+      });
+      return;
+    }
+    _getData();
+  }
 
   @override
   void dispose() {
@@ -101,12 +109,16 @@ class RaffleViewModel with ChangeNotifier {
   }
 
   Future<void> onEnterRaffleTapped() async {
-    final raffle = _raffle;
-    if (raffle == null) {
-      _mainNavigator.showError('No raffle found');
-      return;
+    try {
+      final raffle = _raffle;
+      if (raffle == null) {
+        _mainNavigator.showError('No raffle found');
+        return;
+      }
+      await _raffleRepository.enterRaffle(raffle.id);
+    } catch (e) {
+      _mainNavigator.showError('Failed to enter raffle', error: e);
     }
-    await _raffleRepository.enterRaffle(raffle.id);
   }
 
   void onStartFortuneWheel() => _mainNavigator.goToRaffleWinnerPickerScreen();

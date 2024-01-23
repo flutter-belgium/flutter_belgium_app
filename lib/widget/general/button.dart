@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_belgium/di/injectable.dart';
+import 'package:flutter_belgium/navigation/main_navigator.dart';
 import 'package:flutter_belgium/style/theme.dart';
 import 'package:flutter_belgium/widget/general/loading.dart';
 
@@ -86,7 +88,11 @@ class _ButtonState extends State<Button> {
   Future<void> _onTap() async {
     if (_isLoading) return;
     setState(() => _isLoading = true);
-    await widget.onTap();
+    try {
+      await widget.onTap();
+    } catch (e) {
+      getIt<MainNavigator>().showError('Failed to complete action', error: e);
+    }
     if (!mounted) return;
     setState(() => _isLoading = false);
   }

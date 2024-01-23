@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/model/data/login/login_type.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_belgium/navigation/main_navigator.dart';
@@ -18,7 +18,14 @@ class LoginViewModel with ChangeNotifier {
     this._mainNavigator,
   );
 
-  void init() {}
+  void init() {
+    if (_loginRepository.isLoggedIn) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        _mainNavigator.goToRaffleScreen();
+      });
+      return;
+    }
+  }
 
   Future<void> onLoginTapped(LoginType loginType) async {
     try {

@@ -57,7 +57,8 @@ class _LoginRepository implements LoginRepository {
         authProvider = GoogleAuthProvider();
         break;
     }
-    await _firebaseAuth.signInWithPopup(authProvider);
+    final userCredentials = await _firebaseAuth.signInWithPopup(authProvider);
+    _user = userCredentials.user;
   }
 
   @override
