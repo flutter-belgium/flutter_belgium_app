@@ -6,6 +6,7 @@ import 'package:flutter_belgium/model/data/raffle/winner.dart';
 import 'package:flutter_belgium/repo/login_repo.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:uuid/uuid.dart';
 
 @lazySingleton
 abstract class RaffleRepository {
@@ -31,6 +32,11 @@ abstract class RaffleRepository {
   void setWinner({
     required String raffleId,
     required RaffleParticipant winner,
+  });
+
+  Future<void> manuallyEnterRaffle({
+    required String raffleId,
+    required String name,
   });
 }
 
@@ -87,7 +93,10 @@ class _RaffleRepository implements RaffleRepository {
       userUid: _loginRepository.userId!,
       name: _loginRepository.userName!,
     );
-    await _firebaseFirestore.collection('raffle').doc(raffleId).collection('participants').doc(_loginRepository.userId).set(participant.toJson());
+    await _addParticipantToRaffle(
+      raffleId: raffleId,
+      raffleParticipant: participant,
+    );
   }
 
   @override
@@ -101,4 +110,26 @@ class _RaffleRepository implements RaffleRepository {
   @override
   Stream<bool> hasWonRaffle(String raffleId) =>
       _firebaseFirestore.collection('raffle').doc(raffleId).collection('winners').doc(_loginRepository.userId).snapshots().map((event) => event.exists);
+
+  @override
+  Future<void> manuallyEnterRaffle({
+    required String raffleId,
+    required String name,
+  }) async {
+    final participant = RaffleParticipant(
+      userUid: 'manual_${const Uuid().v4()}',
+      name: name,
+    );
+    await _addParticipantToRaffle(
+      raffleId: raffleId,
+      raffleParticipant: participant,
+    );
+  }
+
+  Future<void> _addParticipantToRaffle({
+    required String raffleId,
+    required RaffleParticipant raffleParticipant,
+  }) async {
+    await _firebaseFirestore.collection('raffle').doc(raffleId).collection('participants').doc(raffleParticipant.userUid).set(raffleParticipant.toJson());
+  }
 }

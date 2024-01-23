@@ -1,6 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_belgium/navigation/page_route/no_transition_page_route.dart';
+import 'package:flutter_belgium/widget/raffle/add_participant_dialog.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter_belgium/navigation/main_navigator.navigator.dart';
@@ -54,4 +55,9 @@ class MainNavigator with BaseNavigator {
       leftBarIndicatorColor: Colors.blue,
     ).show(context);
   }
+
+  Future<String?> goToAddParticipantDialog() => showDialog<String>(
+        context: context,
+        builder: (context) => const AddParticipantDialog(),
+      );
 }

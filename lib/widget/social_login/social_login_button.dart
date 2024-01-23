@@ -17,7 +17,7 @@ class SocialLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Button.chidl(
+    return Button.child(
       onTap: () async => onTap(loginType),
       color: _getBackgroundColor(),
       child: Row(

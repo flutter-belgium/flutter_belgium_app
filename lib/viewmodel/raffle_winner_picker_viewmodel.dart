@@ -30,6 +30,8 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
 
   Stream<int> get selectedIndexStream => _selectedIndexStreamController.stream;
 
+  int get minRequiredParticipants => 2;
+
   List<RaffleParticipant> get participants => _lockedParticipants ?? _allowedParticipants;
 
   bool get isLoading => _raffle == null;
@@ -38,7 +40,7 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
 
   bool get hasInactiveRaffle => _raffle?.active == false;
 
-  bool get hasEnoughParticipants => participants.length > 2;
+  bool get hasEnoughParticipants => participants.length >= minRequiredParticipants;
 
   RaffleWinnerPickerViewModel(
     this._raffleRepository,
@@ -101,5 +103,19 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
       return;
     }
     _raffleRepository.setRaffleActive(raffleId: docId, active: true);
+  }
+
+  Future<void> onAddParticipantTapped() async {
+    final docId = _raffle?.id;
+    if (docId == null) {
+      _mainNavigator.showError('Failed to make raffle active (no raffle available)');
+      return;
+    }
+    final name = await _mainNavigator.goToAddParticipantDialog();
+    if (name == null) return;
+    await _raffleRepository.manuallyEnterRaffle(
+      raffleId: docId,
+      name: name,
+    );
   }
 }

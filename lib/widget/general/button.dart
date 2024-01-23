@@ -18,7 +18,7 @@ class Button extends StatefulWidget {
     super.key,
   }) : child = null;
 
-  const Button.chidl({
+  const Button.child({
     required this.onTap,
     required this.child,
     this.color,
@@ -34,37 +34,52 @@ class _ButtonState extends State<Button> {
   var _isLoading = false;
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      return const Loading();
-    }
-    return GestureDetector(
-      onTap: _onTap,
-      child: Container(
-        width: widget.fullWidth && widget.text != null ? double.infinity : null,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: const [
-            BoxShadow(
-              blurRadius: 10,
-              spreadRadius: 4,
-              color: ThemeColors.shadow,
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        if (_isLoading) ...[
+          const SizedBox(
+            width: 24,
+            height: 24,
+            child: Loading(),
+          ),
+        ],
+        Opacity(
+          opacity: _isLoading ? 0 : 1,
+          child: IgnorePointer(
+            ignoring: _isLoading,
+            child: GestureDetector(
+              onTap: _onTap,
+              child: Container(
+                width: widget.fullWidth && widget.text != null ? double.infinity : null,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 10,
+                      spreadRadius: 4,
+                      color: ThemeColors.shadow,
+                    ),
+                  ],
+                  color: widget.color ?? ThemeColors.primary,
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                child: Builder(builder: (context) {
+                  if (widget.child != null) return widget.child!;
+                  return Text(
+                    widget.text ?? '',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(color: ThemeColors.white),
+                  );
+                }),
+              ),
             ),
-          ],
-          color: widget.color ?? ThemeColors.primary,
-        ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
-        child: Builder(builder: (context) {
-          if (widget.child != null) return widget.child!;
-          return Text(
-            widget.text ?? '',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(color: ThemeColors.white),
-          );
-        }),
-      ),
+          ),
+        )
+      ],
     );
   }
 
