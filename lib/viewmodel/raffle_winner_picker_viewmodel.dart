@@ -69,12 +69,12 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
   Future<void> onPickWinnerTapped() async {
     final raffleId = _raffle?.id;
     if (raffleId == null) {
-      _mainNavigator.showError('Failed to pick winner');
+      _mainNavigator.showErrorMessage('Failed to pick winner');
       return;
     }
     final participants = List<RaffleParticipant>.of(_allowedParticipants);
     if (participants.isEmpty) {
-      _mainNavigator.showError('No participants found');
+      _mainNavigator.showErrorMessage('No participants found');
       return;
     }
     _winner = null;
@@ -99,7 +99,7 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
   Future<void> onMakeRaffleActiveTapped() async {
     final docId = _raffle?.id;
     if (docId == null) {
-      _mainNavigator.showError('Failed to make raffle active (no raffle available)');
+      _mainNavigator.showErrorMessage('Failed to make raffle active (no raffle available)');
       return;
     }
     _raffleRepository.setRaffleActive(raffleId: docId, active: true);
@@ -108,7 +108,7 @@ class RaffleWinnerPickerViewModel with ChangeNotifier {
   Future<void> onAddParticipantTapped() async {
     final docId = _raffle?.id;
     if (docId == null) {
-      _mainNavigator.showError('Failed to make raffle active (no raffle available)');
+      _mainNavigator.showErrorMessage('Failed to make raffle active (no raffle available)');
       return;
     }
     final name = await _mainNavigator.goToAddParticipantDialog();

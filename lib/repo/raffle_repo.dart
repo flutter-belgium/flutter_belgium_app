@@ -3,6 +3,9 @@ import 'package:flutter_belgium/extension/list_extensions.dart';
 import 'package:flutter_belgium/model/data/raffle/participant.dart';
 import 'package:flutter_belgium/model/data/raffle/raffle.dart';
 import 'package:flutter_belgium/model/data/raffle/winner.dart';
+import 'package:flutter_belgium/model/error/invalid_userid_error.dart';
+import 'package:flutter_belgium/model/error/invalid_username_error.dart';
+import 'package:flutter_belgium/model/error/not_loggedin_error.dart';
 import 'package:flutter_belgium/repo/login_repo.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
@@ -89,9 +92,14 @@ class _RaffleRepository implements RaffleRepository {
 
   @override
   Future<void> enterRaffle(String raffleId) async {
+    if (!_loginRepository.isLoggedIn) throw NotLoggedInError();
+    final userId = _loginRepository.userId;
+    final userName = _loginRepository.userName;
+    if (userId == null) throw InvalidUserIdError();
+    if (userName == null) throw InvalidUserNameError();
     final participant = RaffleParticipant(
-      userUid: _loginRepository.userId!,
-      name: _loginRepository.userName!,
+      userUid: userId,
+      name: userName,
     );
     await _addParticipantToRaffle(
       raffleId: raffleId,

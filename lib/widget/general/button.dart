@@ -90,8 +90,8 @@ class _ButtonState extends State<Button> {
     setState(() => _isLoading = true);
     try {
       await widget.onTap();
-    } catch (e) {
-      getIt<MainNavigator>().showError('Failed to complete action', error: e);
+    } catch (error, trace) {
+      getIt<MainNavigator>().showError('Failed to complete action', error: error, trace: trace);
     }
     if (!mounted) return;
     setState(() => _isLoading = false);

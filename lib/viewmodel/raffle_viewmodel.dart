@@ -112,12 +112,12 @@ class RaffleViewModel with ChangeNotifier {
     try {
       final raffle = _raffle;
       if (raffle == null) {
-        _mainNavigator.showError('No raffle found');
+        _mainNavigator.showErrorMessage('No raffle found');
         return;
       }
       await _raffleRepository.enterRaffle(raffle.id);
-    } catch (e) {
-      _mainNavigator.showError('Failed to enter raffle', error: e);
+    } catch (error, trace) {
+      _mainNavigator.showError('Failed to enter raffle', error: error, trace: trace);
     }
   }
 

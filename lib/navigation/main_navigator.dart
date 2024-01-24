@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_belgium/model/error/localized_error.dart';
 import 'package:flutter_belgium/navigation/page_route/no_transition_page_route.dart';
 import 'package:flutter_belgium/widget/raffle/add_participant_dialog.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
@@ -20,13 +21,21 @@ class MainNavigator with BaseNavigator {
   String get initialRoute => RouteNames.splashScreen;
 
   List<NavigatorObserver> get navigatorObservers => _navigatorObservers;
+  void showError(String title, {required Object error, required StackTrace trace}) {
+    var fullMessage = '';
+    if (error is LocalizedError) {
+      fullMessage = error.localizedMessage;
+    }
+    fullMessage = '${error.toString()}\n\n$trace';
+    showErrorMessage(title, message: fullMessage);
+  }
 
-  void showError(String title, {Object? error, StackTrace? trace}) {
+  void showErrorMessage(String title, {String? message}) {
     final context = navigatorKey.currentContext;
     if (context == null) return;
     Flushbar(
       title: title,
-      message: error.toString(),
+      message: message,
       icon: const Icon(
         Icons.error_outline_rounded,
         size: 24,
