@@ -1,4 +1,4 @@
-import 'package:flutter_belgium/util/logger.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 extension ListExtensions<T> on List<T> {
   List<R> onlyMapWithoutException<R>(R Function(T) function) {
@@ -7,8 +7,8 @@ extension ListExtensions<T> on List<T> {
       try {
         final newItem = function(item);
         list.add(newItem);
-      } catch (e, trace) {
-        Logger.log('Failed to map item $item: $e\n$trace');
+      } catch (error, trace) {
+        ImpaktfullLogger.logError('Failed to map item `$item`', error: error, trace: trace);
       }
     }
     return list;

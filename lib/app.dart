@@ -1,23 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_belgium/di/injectable.dart';
-import 'package:flutter_belgium/viewmodel/global_viewmodel.dart';
-import 'package:flutter_belgium/widget/provider/provider_widget.dart';
+import 'package:flutter_belgium/navigator/main_navigator.navigator.dart';
+import 'package:flutter_belgium/theme/app_theme.dart';
+import 'package:flutter_belgium/widget/debug/flavor_flag.dart';
+import 'package:flutter_belgium/widget/di/dependency_tree.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({
+class App extends StatelessWidget {
+  const App({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ProviderWidget<GlobalViewmodel>(
-      create: () => getIt(),
-      builder: (context, viewModel) => MaterialApp(
-        title: 'Flutter Belgium',
-        navigatorKey: viewModel.mainNavigator.navigatorKey,
-        initialRoute: viewModel.mainNavigator.initialRoute,
-        navigatorObservers: viewModel.mainNavigator.navigatorObservers,
-        onGenerateRoute: viewModel.mainNavigator.onGenerateRoute,
+    return DependencyTreeWidget(
+      builder: (context, globalViewModel, translationsViewmodel, mainNavigator) => FlavorBanner(
+        child: ImpaktfullApp(
+          title: 'Impaktfull Flutter Template',
+          impaktfullTheme: AppTheme.getTheme(),
+          locale: translationsViewmodel.locale,
+          supportedLocales: translationsViewmodel.supportedLocales,
+          localizationsDelegates: translationsViewmodel.localizationDelegates,
+          navigatorKey: mainNavigator.navigatorKey,
+          initialRoute: RouteNames.splashScreen,
+          onGenerateRoute: mainNavigator.onGenerateRoute,
+        ),
       ),
     );
   }

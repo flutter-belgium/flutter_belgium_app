@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_belgium/model/data/login/login_type.dart';
-import 'package:flutter_belgium/style/theme.dart';
-import 'package:flutter_belgium/style/theme_assets.dart';
+import 'package:flutter_belgium/theme/theme_assets.dart';
+import 'package:flutter_belgium/theme/theme_colors.dart';
 import 'package:flutter_belgium/widget/general/button.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 class SocialLoginButton extends StatelessWidget {
   final ValueChanged<LoginType> onTap;

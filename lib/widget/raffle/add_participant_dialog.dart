@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_belgium/style/theme.dart';
-import 'package:flutter_belgium/widget/general/button.dart';
+import 'package:flutter_belgium/theme/theme_colors.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 class AddParticipantDialog extends StatefulWidget {
   const AddParticipantDialog({
@@ -22,52 +21,22 @@ class _AddParticipantDialogState extends State<AddParticipantDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 300),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Enter name',
-              ),
-              TextField(
-                controller: textController,
-                cursorColor: ThemeColors.primary,
-                decoration: const InputDecoration(
-                  hintText: 'Name',
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: ThemeColors.primary,
-                      width: 2,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: Button(
-                      onTap: () async => Navigator.of(context).pop(),
-                      text: 'Cancel',
-                      fullWidth: true,
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Button(
-                      onTap: () async => Navigator.of(context).pop(textController.text),
-                      text: 'Add participant',
-                      fullWidth: true,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+    return ImpaktfullDialog(
+      title: 'Add new participant',
+      secondaryLabel: 'cancel',
+      onSecondaryTapped: () => Navigator.of(context).pop(),
+      primaryLabel: 'Add participant',
+      onPrimaryTapped: () async => Navigator.of(context).pop(textController.text),
+      child: TextField(
+        controller: textController,
+        cursorColor: ThemeColors.primary,
+        decoration: const InputDecoration(
+          hintText: 'Name',
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: ThemeColors.primary,
+              width: 2,
+            ),
           ),
         ),
       ),

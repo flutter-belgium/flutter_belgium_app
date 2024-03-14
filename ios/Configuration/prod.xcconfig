@@ -1,0 +1,7 @@
+#include "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
+#include "shared.xcconfig"
+PRODUCT_NAME=Impaktfull Template
+PRODUCT_BUNDLE_IDENTIFIER=com.impaktfull.template
+FLUTTER_TARGET=lib/main_prod.dart
+PROVISIONING_PROFILE_SPECIFIER=Impaktfull Template Prod
+ASSETCATALOG_COMPILER_APPICON_NAME=AppIcon-prod

@@ -1,12 +1,10 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
 import 'package:flutter_belgium/di/injectable.config.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 final getIt = GetIt.asNewInstance();
 
@@ -16,6 +14,7 @@ final getIt = GetIt.asNewInstance();
 )
 Future<void> configureDependencies() async {
   getIt.initGetIt();
+  await configureImpaktfullArchitecture(GetItHelper(getIt));
   await getIt.allReady();
 }
 

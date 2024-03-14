@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_belgium/app.dart';
-import 'package:flutter_belgium/di/injectable.dart';
-import 'package:flutter_belgium/firebase_init.dart';
+import 'package:flutter_belgium/common.dart';
+import 'package:flutter_belgium/util/flavor/flavor_config.dart';
 
 Future<void> main() async {
-  configureDependencies();
-  await initFirebase();
-  runApp(const MyApp());
+  await initApp();
+  FlavorConfig(
+    flavor: Flavor.dev,
+    values: const FlavorValues(
+      baseUrl: 'https://your-api.com/api/v1/',
+    ),
+  );
+  runApp(const App());
 }

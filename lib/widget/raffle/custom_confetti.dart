@@ -1,6 +1,6 @@
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_belgium/style/theme.dart';
+import 'package:flutter_belgium/theme/theme_colors.dart';
 
 class CustomConfettiWidget extends StatelessWidget {
   final ConfettiController confettiController;

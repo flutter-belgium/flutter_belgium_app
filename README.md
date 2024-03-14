@@ -13,4 +13,6 @@ This app has 2 functions (as of now):
 
 - Release to the app stores (Android & iOS)
 - Extra social logins (Google Apple)
+- Meetup agenda
+- Rewacht livestreams
 - Push notifications

@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_belgium/di/injectable.dart';
-import 'package:flutter_belgium/navigation/main_navigator.dart';
-import 'package:flutter_belgium/style/theme.dart';
-import 'package:flutter_belgium/widget/general/loading.dart';
+import 'package:flutter_belgium/navigator/main_navigator.dart';
+import 'package:flutter_belgium/theme/theme_colors.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 class Button extends StatefulWidget {
   final AsyncCallback onTap;
@@ -43,7 +42,7 @@ class _ButtonState extends State<Button> {
           const SizedBox(
             width: 24,
             height: 24,
-            child: Loading(),
+            child: ImpaktfullLoadingIndicator(),
           ),
         ],
         Opacity(

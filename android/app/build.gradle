@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "be.flutterbelgium.app"
+    namespace "com.example.flutter_template"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -41,20 +41,47 @@ android {
     }
 
     defaultConfig {
-        applicationId "be.flutterbelgium.app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        applicationId "com.example.flutter_template"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../keystore/release.keystore")
+            storePassword "your_store_password"
+            keyAlias "your_key_alias"
+            keyPassword "your_key_password"
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions "flavors"
+    productFlavors {
+        dev {
+            dimension "flavors"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+        }
+        alpha {
+            dimension "flavors"
+            applicationIdSuffix ".alpha"
+            versionNameSuffix "-alpha"
+        }
+        beta {
+            dimension "flavors"
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+        }
+        prod {
+            dimension "flavors"
         }
     }
 }
