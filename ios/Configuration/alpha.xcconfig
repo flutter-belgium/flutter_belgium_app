@@ -1,7 +1,7 @@
 #include "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
 #include "shared.xcconfig"
-PRODUCT_NAME=Impaktfull Template Alpha
-PRODUCT_BUNDLE_IDENTIFIER=com.impaktfull.template.alpha
+PRODUCT_NAME=Flutter Belgium Alpha
+PRODUCT_BUNDLE_IDENTIFIER=be.flutterbelgium.app.alpha
 FLUTTER_TARGET=lib/main_alpha.dart
-PROVISIONING_PROFILE_SPECIFIER=Impaktfull Template Alpha
+PROVISIONING_PROFILE_SPECIFIER=Flutter Belgium Alpha
 ASSETCATALOG_COMPILER_APPICON_NAME=AppIcon-alpha
