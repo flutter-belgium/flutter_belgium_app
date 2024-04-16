@@ -50,6 +50,7 @@ app.*.map.json
 **/impaktfull_cli/impaktfull_cli_secrets.dart
 
 # Android
+**/playstore_credentials.json
 **/keystore.properties
 **.jks
 
