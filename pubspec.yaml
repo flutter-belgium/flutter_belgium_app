@@ -17,7 +17,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_navigation_generator_annotations: ^1.0.1
-  impaktfull_architecture: ^0.0.9
+  impaktfull_architecture: ^0.0.10
   sprintf: ^7.0.0
   rxdart: ^0.27.0
   uuid: ^4.2.2
@@ -30,11 +30,8 @@ dev_dependencies:
   flutter_navigation_generator: ^1.0.4+1
   injectable_generator: ^2.4.2
   locale_gen: ^12.1.2
-  impaktfull_cli: ^0.13.7
+  impaktfull_cli: ^0.14.1
 
-dependency_overrides:
-  impaktfull_ui: 0.2.0  
-  
 flutter:
   uses-material-design: true
   assets:
@@ -51,4 +48,4 @@ flutter:
 
 locale_gen:
   default_language: 'en'
-  languages: ['en', 'nl']
+  languages: ['en']
