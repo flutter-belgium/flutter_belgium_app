@@ -23,7 +23,15 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+// Keystore Properties
+def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('keystore.properties')
+
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader('UTF-8') { reader ->
+        keystoreProperties.load(reader)
+    }
+}
 
 android {
     namespace "com.example.flutter_template"
@@ -54,15 +62,15 @@ android {
     signingConfigs {
         debug {
             storeFile file("../keystore/debug.keystore")
-            storePassword keystorePropertiesFile.getProperty('keystore.debug.password')
-            keyAlias keystorePropertiesFile.getProperty('keystore.debug.alias')
-            keyPassword keystorePropertiesFile.getProperty('keystore.debug.password')
+            storePassword keystoreProperties.getProperty('keystore.debug.password')
+            keyAlias keystoreProperties.getProperty('keystore.debug.alias')
+            keyPassword keystoreProperties.getProperty('keystore.debug.password')
         }
         release {
             storeFile file("../keystore/release.keystore")
-            storePassword keystorePropertiesFile.getProperty('keystore.release.password')
-            keyAlias keystorePropertiesFile.getProperty('keystore.release.alias')
-            keyPassword keystorePropertiesFile.getProperty('keystore.release.password')
+            storePassword keystoreProperties.getProperty('keystore.release.password')
+            keyAlias keystoreProperties.getProperty('keystore.release.alias')
+            keyPassword keystoreProperties.getProperty('keystore.release.password')
         }
     }
 
