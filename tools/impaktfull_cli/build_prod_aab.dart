@@ -1,10 +1,12 @@
 import 'package:impaktfull_cli/impaktfull_cli.dart';
 
+import 'build_config.dart';
+
 Future<void> main(List<String> arguments) => ImpaktfullCli().run(
       (cli) async {
-        // final playstoreCredentialsFile = await cli.onePasswordPlugin.downloadServiceAccountCredentials(
-        //   opUuid: BuildConfig.opUuidPlaystoreCredentials,
-        // );
+        final playstoreCredentialsFile = await cli.onePasswordPlugin.downloadServiceAccountCredentials(
+          opUuid: BuildConfig.opUuidPlaystoreCredentials,
+        );
         final buildNr = await cli.ciCdPlugin.flutterBuildPlugin.versionBump(
           flavor: 'prod',
           suffix: 'android',
@@ -14,9 +16,9 @@ Future<void> main(List<String> arguments) => ImpaktfullCli().run(
           obfuscate: false,
           buildNr: buildNr,
           extension: FlutterBuildAndroidExtension.aab,
-          // playStoreUploadConfig: PlayStoreUploadConfig(
-          //   serviceAccountCredentialsFile: playstoreCredentialsFile,
-          // ),
+          playStoreUploadConfig: PlayStoreUploadConfig(
+            serviceAccountCredentialsFile: playstoreCredentialsFile,
+          ),
         );
       },
     );
