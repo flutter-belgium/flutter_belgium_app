@@ -1,5 +1,5 @@
 name: flutter_belgium
-description: A barebone flutter template that will get you up and running in no time.
+description: The Flutter Belgium app to connect with the community.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -7,7 +7,6 @@ environment:
   sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
-  ai_barcode_scanner: ^3.4.1
   confetti: ^0.7.0
   cloud_firestore: ^4.13.1
   firebase_auth: ^4.14.0

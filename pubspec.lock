@@ -25,14 +25,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.25"
-  ai_barcode_scanner:
-    dependency: "direct main"
-    description:
-      name: ai_barcode_scanner
-      sha256: "1d6ce239d84a40c0d586891291eee9b958c748f7de3de75daaa7be79ee511dee"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.4.3"
   analyzer:
     dependency: transitive
     description:
@@ -765,14 +757,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  mobile_scanner:
-    dependency: transitive
-    description:
-      name: mobile_scanner
-      sha256: "827765afbd4792ff3fd105ad593821ac0f6d8a7d352689013b07ee85be336312"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.1"
   nested:
     dependency: transitive
     description:
