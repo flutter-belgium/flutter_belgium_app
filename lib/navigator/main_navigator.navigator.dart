@@ -6,6 +6,8 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart';
+import 'package:flutter_belgium/util/firebase/github/github_sign_in_result.dart'
+    as _i2;
 import 'package:impaktfull_architecture/impaktfull_architecture.dart' as _i1;
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
@@ -16,6 +18,8 @@ import '../screen/login/login_screen.dart';
 import '../screen/raffle/raffle_screen.dart';
 import '../screen/raffle/raffle_winner_picker_screen.dart';
 import '../screen/splash/splash_screen.dart';
+import '../util/firebase/github/github_sign_in_result.dart';
+import '../util/firebase/github/github_sign_in_webview_screen.dart';
 
 mixin BaseNavigator {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -81,6 +85,19 @@ mixin BaseNavigator {
           settings: settings,
           fullscreenDialog: false,
         );
+      case RouteNames.gitHubSignInWebviewScreen:
+        return MaterialPageRoute<GithubSignInPageResult>(
+          builder: (_) => GitHubSignInWebviewScreen(
+            clientId: arguments!['clientId'] as String,
+            clientSecret: arguments!['clientSecret'] as String,
+            allowSignUp: arguments!['allowSignUp'] as bool,
+            scope: arguments!['scope'] as String,
+            redirectUrl: arguments!['redirectUrl'] as String,
+            key: arguments?['key'] as Key?,
+          ),
+          settings: settings,
+          fullscreenDialog: true,
+        );
     }
     return null;
   }
@@ -123,6 +140,28 @@ mixin BaseNavigator {
         RouteNames.debugScreen,
         arguments: {'key': key},
       );
+  Future<_i2.GithubSignInPageResult?> goToGitHubSignInWebviewScreen({
+    required String clientId,
+    required String clientSecret,
+    required bool allowSignUp,
+    required String scope,
+    required String redirectUrl,
+    _i1.Key? key,
+  }) async {
+    final dynamic result = await navigatorKey.currentState?.pushNamed<dynamic>(
+      RouteNames.gitHubSignInWebviewScreen,
+      arguments: {
+        'clientId': clientId,
+        'clientSecret': clientSecret,
+        'allowSignUp': allowSignUp,
+        'scope': scope,
+        'redirectUrl': redirectUrl,
+        'key': key
+      },
+    );
+    return (result as _i2.GithubSignInPageResult?);
+  }
+
   void goBack() => navigatorKey.currentState?.pop();
   void goBackWithResult<T>({T? result}) =>
       navigatorKey.currentState?.pop(result);
@@ -156,4 +195,6 @@ class RouteNames {
   static const debugChangeLanguageScreen = '/debug-change-language';
 
   static const debugScreen = '/debug';
+
+  static const gitHubSignInWebviewScreen = '/git-hub-sign-in-webview';
 }

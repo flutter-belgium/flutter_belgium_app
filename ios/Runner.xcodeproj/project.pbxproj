@@ -10,6 +10,7 @@
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		1CF8CDB98BA7FBB2E0236F99 /* Pods_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596804CDC6F7C6FCE0F9158F /* Pods_RunnerTests.framework */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
+		361712872BCF0B2200B8877E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 361712862BCF0B2200B8877E /* GoogleService-Info.plist */; };
 		366F2F552B371C320065B64E /* dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 366F2F542B371C320065B64E /* dev.xcconfig */; };
 		366F2F572B371C760065B64E /* shared.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 366F2F562B371C760065B64E /* shared.xcconfig */; };
 		366F2F592B371E500065B64E /* alpha.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 366F2F582B371E500065B64E /* alpha.xcconfig */; };
@@ -56,6 +57,7 @@
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		34EDEAF2E6B2F95FB6781AED /* Pods-Runner.debug-prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug-prod.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug-prod.xcconfig"; sourceTree = "<group>"; };
+		361712862BCF0B2200B8877E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		366F2F542B371C320065B64E /* dev.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = dev.xcconfig; sourceTree = "<group>"; };
 		366F2F562B371C760065B64E /* shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = shared.xcconfig; sourceTree = "<group>"; };
 		366F2F582B371E500065B64E /* alpha.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = alpha.xcconfig; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
 				97C147021CF9000F007C117D /* Info.plist */,
+				361712862BCF0B2200B8877E /* GoogleService-Info.plist */,
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
@@ -337,6 +340,7 @@
 				366F2F552B371C320065B64E /* dev.xcconfig in Resources */,
 				366F2F592B371E500065B64E /* alpha.xcconfig in Resources */,
 				366F2F5D2B371E630065B64E /* prod.xcconfig in Resources */,
+				361712872BCF0B2200B8877E /* GoogleService-Info.plist in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 				366F2F572B371C760065B64E /* shared.xcconfig in Resources */,
 			);

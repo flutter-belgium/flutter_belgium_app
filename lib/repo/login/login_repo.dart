@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/model/data/login/login_type.dart';
+import 'package:flutter_belgium/util/firebase/github/github_credentials.dart';
+import 'package:flutter_belgium/util/firebase/github/github_sign_in.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @lazySingleton
@@ -57,8 +60,25 @@ class _LoginRepository implements LoginRepository {
         authProvider = GoogleAuthProvider();
         break;
     }
-    final userCredentials = await _firebaseAuth.signInWithPopup(authProvider);
-    _user = userCredentials.user;
+    if (kIsWeb) {
+      final userCredential = await _firebaseAuth.signInWithPopup(authProvider);
+      _user = userCredential.user;
+    } else {
+      if (authProvider is GithubAuthProvider) {
+        final gitHubSignIn = GitHubSignIn(
+          clientId: GithubCredentials.clientId,
+          clientSecret: GithubCredentials.clientSecret,
+          redirectUrl: GithubCredentials.redirectUrl,
+        );
+        final result = await gitHubSignIn.signIn();
+        final githubAuthCredential = GithubAuthProvider.credential(result.token!);
+        final userCredential = await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+        _user = userCredential.user;
+      } else {
+        final userCredential = await FirebaseAuth.instance.signInWithProvider(authProvider);
+        _user = userCredential.user;
+      }
+    }
   }
 
   @override

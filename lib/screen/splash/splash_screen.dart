@@ -17,7 +17,9 @@ class SplashScreen extends StatelessWidget {
     return ProviderWidget<SplashViewModel>(
       create: () => getIt()..init(),
       builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => const ImpaktfullScreen(
-        child: ImpaktfullLoadingIndicator(),
+        child: Center(
+          child: ImpaktfullLoadingIndicator(),
+        ),
       ),
     );
   }

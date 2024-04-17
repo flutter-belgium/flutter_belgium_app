@@ -34,13 +34,12 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               color: ThemeColors.primaryUltraLight,
-              child: Column(
-                children: [
-                  SocialLoginButton(
-                    onTap: viewModel.onLoginTapped,
-                    loginType: LoginType.github,
-                  ),
-                ],
+              child: SafeArea(
+                top: false,
+                child: SocialLoginButton(
+                  onTap: viewModel.onLoginTapped,
+                  loginType: LoginType.github,
+                ),
               ),
             ),
           ],

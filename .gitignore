@@ -47,12 +47,15 @@ app.*.map.json
 
 #=======PROD=======
 # Dart
+**/github_credentials.dart
 **/impaktfull_cli/impaktfull_cli_secrets.dart
 
 # Android
+**/google-services.json
 **/playstore_credentials.json
 **/keystore.properties
 **.jks
 
 # iOS
+**/GoogleService-Info.plist
 **.mobileprovision

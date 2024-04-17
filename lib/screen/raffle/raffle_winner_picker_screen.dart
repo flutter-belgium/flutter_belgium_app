@@ -20,8 +20,8 @@ class RaffleWinnerPickerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<RaffleWinnerPickerViewModel>(
       create: () => getIt()..init(),
-      builder: (context, viewModel) => Scaffold(
-        body: Builder(builder: (context) {
+      builder: (context, viewModel) => ImpaktfullScreen(
+        child: Builder(builder: (context) {
           if (viewModel.hasInactiveRaffle) {
             return Center(
               child: Button(
@@ -89,60 +89,62 @@ class RaffleWinnerPickerScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 color: ThemeColors.primaryUltraLight,
                 alignment: Alignment.center,
-                child: Builder(builder: (context) {
-                  if (viewModel.isLoading) {
-                    return const ImpaktfullLoadingIndicator();
-                  }
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Participants list (${viewModel.participants.length})',
-                              style: const TextStyle(
-                                fontSize: 24,
-                              ),
-                            ),
-                          ),
-                          Button(
-                            onTap: viewModel.onAddParticipantTapped,
-                            text: '+',
-                            fullWidth: false,
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: viewModel.participants.length,
-                          itemBuilder: (context, index) {
-                            final item = viewModel.participants[index];
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
+                child: SafeArea(
+                  child: Builder(builder: (context) {
+                    if (viewModel.isLoading) {
+                      return const ImpaktfullLoadingIndicator();
+                    }
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
                               child: Text(
-                                item.name,
+                                'Participants list (${viewModel.participants.length})',
                                 style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
                                 ),
                               ),
-                            );
-                          },
+                            ),
+                            Button(
+                              onTap: viewModel.onAddParticipantTapped,
+                              text: '+',
+                              fullWidth: false,
+                            ),
+                          ],
                         ),
-                      ),
-                      if (viewModel.hasEnoughParticipants && viewModel.winnerName == null) ...[
-                        Center(
-                          child: Button(
-                            onTap: viewModel.onPickWinnerTapped,
-                            text: 'Pick Winner',
-                            fullWidth: false,
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: viewModel.participants.length,
+                            itemBuilder: (context, index) {
+                              final item = viewModel.participants[index];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                child: Text(
+                                  item.name,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
-                      ]
-                    ],
-                  );
-                }),
+                        if (viewModel.hasEnoughParticipants && viewModel.winnerName == null) ...[
+                          Center(
+                            child: Button(
+                              onTap: viewModel.onPickWinnerTapped,
+                              text: 'Pick Winner',
+                              fullWidth: false,
+                            ),
+                          ),
+                        ]
+                      ],
+                    );
+                  }),
+                ),
               ),
             ],
           );

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/theme/theme_assets.dart';
 import 'package:flutter_belgium/theme/theme_colors.dart';
 import 'package:flutter_belgium/viewmodel/raffle/raffle_viewmodel.dart';
@@ -22,9 +23,9 @@ class RaffleScreen extends StatelessWidget {
     return ProviderWidget<RaffleViewModel>(
       create: () => getIt()..init(),
       builder: (context, viewModel) => ShortcutsManager(
-        onStartFortuneWheel: viewModel.onStartFortuneWheel,
-        child: Scaffold(
-          body: Stack(
+        onStartFortuneWheel: kIsWeb ? viewModel.onStartFortuneWheel : null,
+        child: ImpaktfullScreen(
+          child: Stack(
             children: [
               Column(
                 children: [
@@ -68,33 +69,36 @@ class RaffleScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     color: ThemeColors.primaryUltraLight,
                     alignment: Alignment.center,
-                    child: Builder(builder: (context) {
-                      if (viewModel.isLoading) {
-                        return const ImpaktfullLoadingIndicator();
-                      }
-                      if (viewModel.hasAlreadyWonRaffle) {
+                    child: SafeArea(
+                      top: false,
+                      child: Builder(builder: (context) {
+                        if (viewModel.isLoading) {
+                          return const ImpaktfullLoadingIndicator();
+                        }
+                        if (viewModel.hasAlreadyWonRaffle) {
+                          return Text(
+                            "You already won today",
+                            style: Theme.of(context).textTheme.labelLarge,
+                          );
+                        }
+                        if (viewModel.hasEnteredRaffle) {
+                          return Text(
+                            "You already entered today's raffle",
+                            style: Theme.of(context).textTheme.labelLarge,
+                          );
+                        }
+                        if (viewModel.hasRaffle) {
+                          return ImpaktfullButton.primary(
+                            label: 'Enter raffle',
+                            onTap: viewModel.onEnterRaffleTapped,
+                          );
+                        }
                         return Text(
-                          "You already won today",
+                          'No raffle today',
                           style: Theme.of(context).textTheme.labelLarge,
                         );
-                      }
-                      if (viewModel.hasEnteredRaffle) {
-                        return Text(
-                          "You already entered today's raffle",
-                          style: Theme.of(context).textTheme.labelLarge,
-                        );
-                      }
-                      if (viewModel.hasRaffle) {
-                        return ImpaktfullButton.primary(
-                          label: 'Enter raffle',
-                          onTap: viewModel.onEnterRaffleTapped,
-                        );
-                      }
-                      return Text(
-                        'No raffle today',
-                        style: Theme.of(context).textTheme.labelLarge,
-                      );
-                    }),
+                      }),
+                    ),
                   ),
                 ],
               ),
