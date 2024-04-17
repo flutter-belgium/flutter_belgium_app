@@ -10,12 +10,17 @@ class Button extends StatefulWidget {
   final Widget? child;
   final Color? color;
   final bool fullWidth;
+  final EdgeInsets padding;
 
   const Button({
     required this.onTap,
     required this.text,
     this.color,
     this.fullWidth = true,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 12,
+    ),
     super.key,
   }) : child = null;
 
@@ -24,6 +29,10 @@ class Button extends StatefulWidget {
     required this.child,
     this.color,
     this.fullWidth = true,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 12,
+    ),
     super.key,
   }) : text = null;
 
@@ -64,10 +73,7 @@ class _ButtonState extends State<Button> {
                   ],
                   color: widget.color ?? ThemeColors.primary,
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
+                padding: widget.padding,
                 child: Builder(builder: (context) {
                   if (widget.child != null) return widget.child!;
                   return Text(

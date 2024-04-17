@@ -19,17 +19,25 @@ class SocialLoginButton extends StatelessWidget {
     return Button.child(
       onTap: () async => onTap(loginType),
       color: _getBackgroundColor(),
-      child: Row(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: ImpaktfullAutoLayout.horizontal(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SvgPicture.asset(
-            _getLogo(),
-            width: 32,
+          Padding(
+            padding: _getLogoPadding(),
+            child: SvgPicture.asset(
+              _getLogo(),
+              width: _getLogoSize(),
+            ),
           ),
           Expanded(
-            child: Text(
-              _getText(),
-              textAlign: TextAlign.center,
-              style: _getTextStyle(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Text(
+                _getText(),
+                textAlign: TextAlign.center,
+                style: _getTextStyle(),
+              ),
             ),
           ),
           const SizedBox(width: 32),
@@ -40,6 +48,8 @@ class SocialLoginButton extends StatelessWidget {
 
   String _getText() {
     switch (loginType) {
+      case LoginType.apple:
+        return 'Sign in with Apple';
       case LoginType.google:
         return 'Sign in with Google';
       case LoginType.github:
@@ -49,6 +59,8 @@ class SocialLoginButton extends StatelessWidget {
 
   String _getLogo() {
     switch (loginType) {
+      case LoginType.apple:
+        return ThemeAssets.appleLogo;
       case LoginType.google:
         return ThemeAssets.googleLogo;
       case LoginType.github:
@@ -56,8 +68,30 @@ class SocialLoginButton extends StatelessWidget {
     }
   }
 
+  double _getLogoSize() {
+    switch (loginType) {
+      case LoginType.apple:
+        return 30;
+      case LoginType.google:
+      case LoginType.github:
+        return 32;
+    }
+  }
+
+  EdgeInsets _getLogoPadding() {
+    switch (loginType) {
+      case LoginType.apple:
+        return const EdgeInsets.only(bottom: 4);
+      case LoginType.google:
+      case LoginType.github:
+        return EdgeInsets.zero;
+    }
+  }
+
   Color _getBackgroundColor() {
     switch (loginType) {
+      case LoginType.apple:
+        return Colors.black;
       case LoginType.google:
         return ThemeColors.white;
       case LoginType.github:
@@ -67,6 +101,8 @@ class SocialLoginButton extends StatelessWidget {
 
   TextStyle _getTextStyle() {
     switch (loginType) {
+      case LoginType.apple:
+        return const TextStyle(color: ThemeColors.white);
       case LoginType.google:
         return const TextStyle(color: ThemeColors.primary);
       case LoginType.github:

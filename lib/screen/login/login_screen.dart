@@ -36,9 +36,18 @@ class LoginScreen extends StatelessWidget {
               color: ThemeColors.primaryUltraLight,
               child: SafeArea(
                 top: false,
-                child: SocialLoginButton(
-                  onTap: viewModel.onLoginTapped,
-                  loginType: LoginType.github,
+                child: ImpaktfullAutoLayout.vertical(
+                  spacing: 8,
+                  children: [
+                    SocialLoginButton(
+                      onTap: viewModel.onLoginTapped,
+                      loginType: LoginType.github,
+                    ),
+                    SocialLoginButton(
+                      onTap: viewModel.onLoginTapped,
+                      loginType: LoginType.apple,
+                    ),
+                  ],
                 ),
               ),
             ),

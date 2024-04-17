@@ -53,6 +53,9 @@ class _LoginRepository implements LoginRepository {
   Future<void> login(LoginType loginType) async {
     AuthProvider authProvider;
     switch (loginType) {
+      case LoginType.apple:
+        authProvider = AppleAuthProvider();
+        break;
       case LoginType.github:
         authProvider = GithubAuthProvider();
         break;
