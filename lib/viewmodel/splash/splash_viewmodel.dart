@@ -15,7 +15,7 @@ class SplashViewModel with ChangeNotifier {
   Future<void> init() async {
     await Future.delayed(const Duration(milliseconds: 500));
     if (_loginRepository.isLoggedIn) {
-      _mainNavigator.goToRaffleScreen();
+      _mainNavigator.goToHomeScreen();
     } else {
       _mainNavigator.goToLoginScreen();
     }

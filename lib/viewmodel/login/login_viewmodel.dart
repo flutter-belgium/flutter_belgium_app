@@ -20,7 +20,7 @@ class LoginViewModel with ChangeNotifier {
   void init() {
     if (_loginRepository.isLoggedIn) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        _mainNavigator.goToRaffleScreen();
+        _mainNavigator.goToHomeScreen();
       });
       return;
     }
@@ -33,7 +33,7 @@ class LoginViewModel with ChangeNotifier {
       await _loginRepository.login(loginType);
       _isLoading = false;
       notifyListeners();
-      _mainNavigator.goToRaffleScreen();
+      _mainNavigator.goToHomeScreen();
     } catch (error, trace) {
       _mainNavigator.showError('Failed to open login', error: error, trace: trace);
       _isLoading = false;
