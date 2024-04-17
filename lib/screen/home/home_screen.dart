@@ -1,6 +1,7 @@
 import 'package:flutter_belgium/screen/raffle/raffle_screen.dart';
 import 'package:flutter_belgium/screen/settings/settings_screen.dart';
 import 'package:flutter_belgium/theme/theme_assets.dart';
+import 'package:flutter_belgium/screen/events/events_screen.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
@@ -26,29 +27,41 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ImpaktfullAutoLayout.vertical(
           children: [
             Expanded(
-              child: IndexedStack(
-                index: _selectedIndex,
-                children: const [
-                  RaffleScreen(),
-                  SettingsScreen(),
-                ],
+              child: MediaQuery.removePadding(
+                context: context,
+                removeBottom: true,
+                child: IndexedStack(
+                  index: _selectedIndex,
+                  children: const [
+                    EventsScreen(),
+                    RaffleScreen(),
+                    SettingsScreen(),
+                  ],
+                ),
               ),
             ),
             ImpaktfullBottomNavigation(
               items: [
                 ImpaktfullBottomNavigationItem(
-                  label: 'Home',
+                  label: 'Events',
                   svgIcon: ThemeAssets.iconHome,
                   svgIconSelected: ThemeAssets.iconHomeSelected,
                   isSelected: _selectedIndex == 0,
                   onTap: () => setState(() => _selectedIndex = 0),
                 ),
                 ImpaktfullBottomNavigationItem(
+                  label: 'Raffle',
+                  svgIcon: ThemeAssets.iconHome,
+                  svgIconSelected: ThemeAssets.iconHomeSelected,
+                  isSelected: _selectedIndex == 1,
+                  onTap: () => setState(() => _selectedIndex = 1),
+                ),
+                ImpaktfullBottomNavigationItem(
                   label: 'Settings',
                   svgIcon: ThemeAssets.iconSettings,
                   svgIconSelected: ThemeAssets.iconSettingsSelected,
-                  isSelected: _selectedIndex == 1,
-                  onTap: () => setState(() => _selectedIndex = 1),
+                  isSelected: _selectedIndex == 2,
+                  onTap: () => setState(() => _selectedIndex = 2),
                 ),
               ],
             ),

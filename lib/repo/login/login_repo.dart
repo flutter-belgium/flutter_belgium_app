@@ -54,7 +54,10 @@ class _LoginRepository implements LoginRepository {
     AuthProvider authProvider;
     switch (loginType) {
       case LoginType.apple:
-        authProvider = AppleAuthProvider();
+        final appleAuthProvider = AppleAuthProvider();
+        appleAuthProvider.addScope('email');
+        appleAuthProvider.addScope('name');
+        authProvider = appleAuthProvider;
         break;
       case LoginType.github:
         authProvider = GithubAuthProvider();
