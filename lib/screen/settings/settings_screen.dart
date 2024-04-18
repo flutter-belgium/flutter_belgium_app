@@ -14,12 +14,17 @@ class SettingsScreen extends StatelessWidget {
       title: 'Settings',
       child: ImpaktfullListView(
         children: [
-          ImpaktfullListItem.danger(
-            title: 'Sign out',
-            onAsyncTap: () async {
-              await getIt<FirebaseAuth>().signOut();
-              getIt<MainNavigator>().goToLoginScreen();
-            },
+          ImpaktfullSeparatedColumn(
+            title: 'Account',
+            children: [
+              ImpaktfullListItem.danger(
+                title: 'Sign out',
+                onAsyncTap: () async {
+                  await getIt<FirebaseAuth>().signOut();
+                  getIt<MainNavigator>().goToLoginScreen();
+                },
+              ),
+            ],
           ),
         ],
       ),

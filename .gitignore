@@ -49,6 +49,7 @@ app.*.map.json
 # Dart
 **/github_credentials.dart
 **/impaktfull_cli/impaktfull_cli_secrets.dart
+**/secrets/**
 
 # Android
 **/google-services.json

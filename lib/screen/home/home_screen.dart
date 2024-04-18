@@ -1,29 +1,27 @@
+import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/screen/raffle/raffle_screen.dart';
 import 'package:flutter_belgium/screen/settings/settings_screen.dart';
+import 'package:flutter_belgium/screen/talk/talks_screen.dart';
 import 'package:flutter_belgium/theme/theme_assets.dart';
-import 'package:flutter_belgium/screen/events/events_screen.dart';
+import 'package:flutter_belgium/screen/event/events_screen.dart';
+import 'package:flutter_belgium/viewmodel/home/home_viewmodel.dart';
+import 'package:flutter_belgium/widget/provider/provider_widget.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @FlutterRoute(
   navigationType: NavigationType.pushAndReplaceAll,
 )
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
   });
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  var _selectedIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return ImpaktfullThemeLocalizer(
-      builder: (context, theme) => ImpaktfullScreen(
+    return ProviderWidget<HomeViewmodel>(
+      create: () => getIt()..init(),
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullScreen(
         child: ImpaktfullAutoLayout.vertical(
           children: [
             Expanded(
@@ -31,9 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 context: context,
                 removeBottom: true,
                 child: IndexedStack(
-                  index: _selectedIndex,
+                  index: viewModel.index,
                   children: const [
                     EventsScreen(),
+                    TalksScreen(),
                     RaffleScreen(),
                     SettingsScreen(),
                   ],
@@ -44,24 +43,31 @@ class _HomeScreenState extends State<HomeScreen> {
               items: [
                 ImpaktfullBottomNavigationItem(
                   label: 'Events',
-                  svgIcon: ThemeAssets.iconHome,
-                  svgIconSelected: ThemeAssets.iconHomeSelected,
-                  isSelected: _selectedIndex == 0,
-                  onTap: () => setState(() => _selectedIndex = 0),
+                  svgIcon: ThemeAssets.iconEvents,
+                  svgIconSelected: ThemeAssets.iconEventsSelected,
+                  isSelected: viewModel.index == 0,
+                  onTap: () => viewModel.onTapSelected(0),
                 ),
+                // ImpaktfullBottomNavigationItem(
+                //   label: 'Talks',
+                //   svgIcon: ThemeAssets.iconMicrophone,
+                //   svgIconSelected: ThemeAssets.iconMicrophoneSelected,
+                //   isSelected: viewModel.index == 1,
+                //   onTap: () => viewModel.onTapSelected(1),
+                // ),
                 ImpaktfullBottomNavigationItem(
                   label: 'Raffle',
-                  svgIcon: ThemeAssets.iconHome,
-                  svgIconSelected: ThemeAssets.iconHomeSelected,
-                  isSelected: _selectedIndex == 1,
-                  onTap: () => setState(() => _selectedIndex = 1),
+                  svgIcon: ThemeAssets.iconRaffle,
+                  svgIconSelected: ThemeAssets.iconRaffleSelected,
+                  isSelected: viewModel.index == 2,
+                  onTap: () => viewModel.onTapSelected(2),
                 ),
                 ImpaktfullBottomNavigationItem(
                   label: 'Settings',
                   svgIcon: ThemeAssets.iconSettings,
                   svgIconSelected: ThemeAssets.iconSettingsSelected,
-                  isSelected: _selectedIndex == 2,
-                  onTap: () => setState(() => _selectedIndex = 2),
+                  isSelected: viewModel.index == 3,
+                  onTap: () => viewModel.onTapSelected(3),
                 ),
               ],
             ),

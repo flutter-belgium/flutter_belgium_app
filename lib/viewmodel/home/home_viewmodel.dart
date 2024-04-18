@@ -1,27 +1,18 @@
-import 'package:flutter_belgium/di/injectable.dart';
-import 'package:flutter_belgium/navigator/main_navigator.dart';
-import 'package:flutter_belgium/viewmodel/global/translations_viewmodel.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @injectable
 class HomeViewmodel extends ChangeNotifierEx {
-  final MainNavigator _mainNavigator;
+  var _index = 0;
 
-  var _counter = 0;
+  int get index => _index;
 
-  String get counterValue => '$_counter';
-
-  HomeViewmodel(
-    this._mainNavigator,
-  );
+  HomeViewmodel();
 
   Future<void> init() async {}
 
-  void onIncrementTapped() {
-    getIt<TranslationsViewmodel>().onSwitchToDutch();
-    _counter++;
+  void onTapSelected(int index) {
+    if (_index == index) return;
+    _index = index;
     notifyListeners();
   }
-
-  void onDebugMenuTapped() => _mainNavigator.goToDebugScreen();
 }
