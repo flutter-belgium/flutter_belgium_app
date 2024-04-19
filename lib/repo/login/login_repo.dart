@@ -23,6 +23,8 @@ abstract class LoginRepository {
   Future<void> login(LoginType loginType);
 
   Future<void> logout();
+
+  Future<void> deleteUser();
 }
 
 class _LoginRepository implements LoginRepository {
@@ -78,10 +80,10 @@ class _LoginRepository implements LoginRepository {
         );
         final result = await gitHubSignIn.signIn();
         final githubAuthCredential = GithubAuthProvider.credential(result.token!);
-        final userCredential = await FirebaseAuth.instance.signInWithCredential(githubAuthCredential);
+        final userCredential = await _firebaseAuth.signInWithCredential(githubAuthCredential);
         _user = userCredential.user;
       } else {
-        final userCredential = await FirebaseAuth.instance.signInWithProvider(authProvider);
+        final userCredential = await _firebaseAuth.signInWithProvider(authProvider);
         _user = userCredential.user;
       }
     }
@@ -90,5 +92,11 @@ class _LoginRepository implements LoginRepository {
   @override
   Future<void> logout() async {
     await _firebaseAuth.signOut();
+  }
+
+  @override
+  Future<void> deleteUser() async {
+    await _firebaseAuth.currentUser?.delete();
+    _user = null;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter_belgium/util/locale/localization.dart';
 import 'package:flutter_belgium/widget/raffle/add_participant_dialog.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:flutter_belgium/navigator/main_navigator.navigator.dart';
@@ -29,4 +30,27 @@ class MainNavigator with BaseNavigator {
         context: navigatorKey.currentContext!,
         builder: (context) => const AddParticipantDialog(),
       );
+
+  Future<bool> showConfimDialog({
+    required String title,
+    required String body,
+    required String primaryLabel,
+    String secondaryLabel = 'Cancel',
+  }) async {
+    final localization = Localization.of(navigatorKey.currentContext!);
+
+    final result = await showDialog<bool>(
+      context: navigatorKey.currentContext!,
+      builder: (context) => ImpaktfullDialog(
+        title: localization.getTranslation(title),
+        body: localization.getTranslation(body),
+        primaryButtonType: ImpaktfullDialogPrimaryButtonType.danger,
+        secondaryLabel: localization.getTranslation(secondaryLabel),
+        primaryLabel: localization.getTranslation(primaryLabel),
+        onPrimaryTapped: () => goBackWithResult(result: true),
+        onSecondaryTapped: () => goBackWithResult(result: false),
+      ),
+    );
+    return result == true;
+  }
 }
