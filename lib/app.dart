@@ -14,7 +14,7 @@ class App extends StatelessWidget {
     return DependencyTreeWidget(
       builder: (context, globalViewModel, translationsViewmodel, mainNavigator) => FlavorBanner(
         child: ImpaktfullApp(
-          title: 'Impaktfull Flutter Template',
+          title: 'Flutter Belgium',
           impaktfullTheme: AppTheme.getTheme(),
           locale: translationsViewmodel.locale,
           supportedLocales: translationsViewmodel.supportedLocales,
