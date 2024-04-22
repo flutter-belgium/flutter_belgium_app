@@ -18,7 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_navigation_generator_annotations: ^1.0.1
-  impaktfull_architecture: ^0.0.10
+  impaktfull_architecture: ^0.1.1
   json_annotation: ^4.8.1
   sprintf: ^7.0.0
   rxdart: ^0.27.0
@@ -35,12 +35,6 @@ dev_dependencies:
   json_serializable: ^6.7.1
   locale_gen: ^12.1.2
   impaktfull_cli: ^0.14.1
-
-dependency_overrides:
-  impaktfull_ui: 
-    path: /Users/vanlooverenkoen/work/open_source/impaktfull/flutter_impaktfull_ui
-  impaktfull_architecture: 
-    path: /Users/vanlooverenkoen/work/open_source/impaktfull/flutter_architecture
 
 flutter:
   uses-material-design: true

@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/model/data/login/login_type.dart';
-import 'package:flutter_belgium/util/firebase/github/github_credentials.dart';
+import 'package:flutter_belgium/model/data/remote_config/remote_config_data.dart';
+import 'package:flutter_belgium/secrets/github_credentials.dart';
 import 'package:flutter_belgium/util/firebase/github/github_sign_in.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
@@ -13,6 +14,7 @@ abstract class LoginRepository {
   ) = _LoginRepository;
 
   bool get isLoggedIn;
+  bool get isAdmin;
 
   String? get userId;
 
@@ -44,6 +46,12 @@ class _LoginRepository implements LoginRepository {
 
   @override
   bool get isLoggedIn => _user != null;
+
+  @override
+  bool get isAdmin {
+    if (userId == null) return false;
+    return RemoteConfigData.instance.adminIds.contains(userId);
+  }
 
   @override
   String? get userId => _user?.uid;

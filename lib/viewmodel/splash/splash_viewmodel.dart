@@ -5,7 +5,7 @@ import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 @injectable
 class SplashViewModel with ChangeNotifier {
   final MainNavigator _mainNavigator;
-  final ImpaktfullRemoteConfigRepository<RemoteConfigData> _remoteConfigRepo;
+  final RemoteConfigRepository<RemoteConfigData> _remoteConfigRepo;
   final VersionCheckRepository _versionCheckRepo;
 
   SplashViewModel(

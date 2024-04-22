@@ -22,7 +22,7 @@ class LoginViewModel with ChangeNotifier {
   void init() {
     if (_loginRepository.isLoggedIn) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        unawaited(_mainNavigator.goToNextOnboardingScreen());
+        _mainNavigator.goToSplashScreen();
       });
       return;
     }

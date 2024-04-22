@@ -47,9 +47,9 @@ app.*.map.json
 
 #=======PROD=======
 # Dart
-**/github_credentials.dart
+**/secrets/github_credentials.dart
+**/secrets/airtable_config.dart
 **/impaktfull_cli/impaktfull_cli_secrets.dart
-**/secrets/**
 
 # Android
 **/google-services.json

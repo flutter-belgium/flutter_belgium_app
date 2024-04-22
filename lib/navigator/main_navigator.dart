@@ -12,9 +12,14 @@ import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 @flutterNavigator
 class MainNavigator with BaseNavigator {
   Future<void> goToNextOnboardingScreen() async {
-    if (getIt<LoginRepository>().isLoggedIn) {
+    final loginRepository = getIt<LoginRepository>();
+    if (loginRepository.isLoggedIn) {
       if (kIsWeb) {
-        goToRaffleScreen();
+        if (loginRepository.isAdmin) {
+          goToRaffleScreen();
+          return;
+        }
+        showErrorMessage('This app is only supported for admin users, use the mobile app instead.');
         return;
       }
       goToHomeScreen();

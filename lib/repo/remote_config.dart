@@ -4,12 +4,12 @@ import 'package:flutter_belgium/util/flavor/flavor_config.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @LazySingleton(
-  as: ImpaktfullRemoteConfigRepository,
+  as: RemoteConfigRepository,
 )
-class RemoteConfigRepository extends ImpaktfullBaseRemoteConfigRepository<RemoteConfigData> {
+class AppRemoteConfigRepository extends RemoteConfigRepository<RemoteConfigData> {
   final FirebaseRemoteConfig _firebaseRemoteConfig;
 
-  RemoteConfigRepository(
+  AppRemoteConfigRepository(
     this._firebaseRemoteConfig,
     super.sharedPrefsStore,
     super.connectivityController,
@@ -33,6 +33,7 @@ class RemoteConfigRepository extends ImpaktfullBaseRemoteConfigRepository<Remote
         latestVersionCode: 1,
         minVersionCode: 1,
         updateUrl: Platform.isAndroid ? 'https://play.google.com/store/apps/details?id=be.flutterbelgium.app' : 'https://apps.apple.com/us/app/flutter-belgium/id6479450596',
+        adminIds: [],
       );
 
   @override

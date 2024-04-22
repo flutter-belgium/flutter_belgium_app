@@ -624,10 +624,11 @@ packages:
   impaktfull_architecture:
     dependency: "direct main"
     description:
-      path: "/Users/vanlooverenkoen/work/open_source/impaktfull/flutter_architecture"
-      relative: false
-    source: path
-    version: "0.0.10"
+      name: impaktfull_architecture
+      sha256: fa99deae3e1c4e8ce12fc3279f2c6ead18e09c2055e599124236c9c8384a5f51
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   impaktfull_cli:
     dependency: "direct dev"
     description:
@@ -637,11 +638,12 @@ packages:
     source: hosted
     version: "0.14.1"
   impaktfull_ui:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "/Users/vanlooverenkoen/work/open_source/impaktfull/flutter_impaktfull_ui"
-      relative: false
-    source: path
+      name: impaktfull_ui
+      sha256: "6fef6db851b9f9d165e3040048862a0a53065cccff58f33dd6301cba2558cd19"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.6.0"
   injectable:
     dependency: transitive
