@@ -1,7 +1,7 @@
 name: flutter_belgium
 description: The Flutter Belgium app to connect with the community.
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
