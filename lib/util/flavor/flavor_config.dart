@@ -29,11 +29,7 @@ enum Flavor {
 }
 
 class FlavorValues {
-  final String baseUrl;
-
-  const FlavorValues({
-    required this.baseUrl,
-  });
+  const FlavorValues();
 }
 
 class FlavorConfig {

@@ -7,8 +7,12 @@ import 'package:flutter_belgium/widget/general/tripple_tap_detector.dart';
 import 'package:flutter_belgium/widget/raffle/custom_confetti.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/widget/provider/provider_widget.dart';
+import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
+@FlutterRoute(
+  navigationType: NavigationType.pushAndReplaceAll,
+)
 class RaffleScreen extends StatelessWidget {
   const RaffleScreen({
     super.key,

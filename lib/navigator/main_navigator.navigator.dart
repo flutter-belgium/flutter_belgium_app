@@ -5,6 +5,8 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter/foundation.dart' as _i3;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_belgium/util/firebase/github/github_sign_in_result.dart'
     as _i1;
@@ -17,6 +19,7 @@ import '../screen/debug/debug_screen.dart';
 import '../screen/force_update/force_update_screen.dart';
 import '../screen/home/home_screen.dart';
 import '../screen/login/login_screen.dart';
+import '../screen/raffle/raffle_screen.dart';
 import '../screen/raffle/raffle_winner_picker_screen.dart';
 import '../screen/splash/splash_screen.dart';
 import '../util/firebase/github/github_sign_in_result.dart';
@@ -62,6 +65,14 @@ mixin BaseNavigator {
       case RouteNames.raffleWinnerPickerScreen:
         return MaterialPageRoute<void>(
           builder: (_) => RaffleWinnerPickerScreen(
+            key: arguments?['key'] as Key?,
+          ),
+          settings: settings,
+          fullscreenDialog: false,
+        );
+      case RouteNames.raffleScreen:
+        return MaterialPageRoute<void>(
+          builder: (_) => RaffleScreen(
             key: arguments?['key'] as Key?,
           ),
           settings: settings,
@@ -150,6 +161,12 @@ mixin BaseNavigator {
         RouteNames.raffleWinnerPickerScreen,
         arguments: {'key': key},
       );
+  void goToRaffleScreen({_i3.Key? key}) =>
+      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+        RouteNames.raffleScreen,
+        (_) => false,
+        arguments: {'key': key},
+      );
   void goToLoginScreen({_i2.Key? key}) =>
       navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.loginScreen,
@@ -203,6 +220,8 @@ class RouteNames {
   static const splashScreen = '/splash';
 
   static const raffleWinnerPickerScreen = '/raffle-winner-picker';
+
+  static const raffleScreen = '/raffle';
 
   static const loginScreen = '/login';
 

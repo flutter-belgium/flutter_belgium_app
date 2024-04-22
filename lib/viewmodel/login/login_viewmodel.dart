@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_belgium/model/data/login/login_type.dart';
 import 'package:flutter_belgium/navigator/main_navigator.dart';
 import 'package:flutter_belgium/repo/login/login_repo.dart';
@@ -20,7 +22,7 @@ class LoginViewModel with ChangeNotifier {
   void init() {
     if (_loginRepository.isLoggedIn) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        _mainNavigator.goToHomeScreen();
+        unawaited(_mainNavigator.goToNextOnboardingScreen());
       });
       return;
     }
@@ -33,7 +35,7 @@ class LoginViewModel with ChangeNotifier {
       await _loginRepository.login(loginType);
       _isLoading = false;
       notifyListeners();
-      _mainNavigator.goToHomeScreen();
+      unawaited(_mainNavigator.goToNextOnboardingScreen());
     } catch (error, trace) {
       _mainNavigator.showError('Failed to open login', error: error, trace: trace);
       _isLoading = false;

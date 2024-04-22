@@ -99,7 +99,6 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i13.LoginRepository>(),
         ));
     gh.factory<_i19.SplashViewModel>(() => _i19.SplashViewModel(
-          gh<_i13.LoginRepository>(),
           gh<_i14.MainNavigator>(),
           gh<_i3.ImpaktfullRemoteConfigRepository<_i10.RemoteConfigData>>(),
           gh<_i3.VersionCheckRepository>(),

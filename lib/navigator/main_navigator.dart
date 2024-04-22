@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/model/data/remote_config/remote_config_data.dart';
+import 'package:flutter_belgium/repo/login/login_repo.dart';
 import 'package:flutter_belgium/util/locale/localization.dart';
 import 'package:flutter_belgium/widget/raffle/add_participant_dialog.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
@@ -8,6 +11,18 @@ import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 @lazySingleton
 @flutterNavigator
 class MainNavigator with BaseNavigator {
+  Future<void> goToNextOnboardingScreen() async {
+    if (getIt<LoginRepository>().isLoggedIn) {
+      if (kIsWeb) {
+        goToRaffleScreen();
+        return;
+      }
+      goToHomeScreen();
+    } else {
+      goToLoginScreen();
+    }
+  }
+
   void showError(String title, {required Object error, required StackTrace trace}) {
     var fullMessage = '';
     if (error is BaseLocalizedError) {

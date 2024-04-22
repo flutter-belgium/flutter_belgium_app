@@ -7,9 +7,7 @@ Future<void> main() async {
   await initApp();
   FlavorConfig(
     flavor: Flavor.prod,
-    values: const FlavorValues(
-      baseUrl: 'https://your-api.com/api/v1/',
-    ),
+    values: const FlavorValues(),
   );
   runApp(const App());
 }
