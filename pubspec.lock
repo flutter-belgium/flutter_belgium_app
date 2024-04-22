@@ -385,6 +385,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.5"
+  firebase_remote_config:
+    dependency: "direct main"
+    description:
+      name: firebase_remote_config
+      sha256: b085a72c007bd8f177a7ab98b8292d764659b07fb6b0561b84125239ee656efc
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.3.17"
+  firebase_remote_config_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_remote_config_platform_interface
+      sha256: c589e007156b2c9f903253764c108abb96c1b56dd17cf0b91afc4b72ccab7bb6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.25"
+  firebase_remote_config_web:
+    dependency: transitive
+    description:
+      name: firebase_remote_config_web
+      sha256: "92443c70e2721ab9d4beb23eb1d9f971da7381332451daee04f619b0f9204569"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.4.25"
   fixnum:
     dependency: transitive
     description:
@@ -600,10 +624,9 @@ packages:
   impaktfull_architecture:
     dependency: "direct main"
     description:
-      name: impaktfull_architecture
-      sha256: f1758cbffbe0e342965b53b99ba1f329db1d0ceba5fd616bc4bbd2916d9a7ad1
-      url: "https://pub.dev"
-    source: hosted
+      path: "/Users/vanlooverenkoen/work/open_source/impaktfull/flutter_architecture"
+      relative: false
+    source: path
     version: "0.0.10"
   impaktfull_cli:
     dependency: "direct dev"
@@ -614,12 +637,11 @@ packages:
     source: hosted
     version: "0.14.1"
   impaktfull_ui:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: impaktfull_ui
-      sha256: "6fef6db851b9f9d165e3040048862a0a53065cccff58f33dd6301cba2558cd19"
-      url: "https://pub.dev"
-    source: hosted
+      path: "/Users/vanlooverenkoen/work/open_source/impaktfull/flutter_impaktfull_ui"
+      relative: false
+    source: path
     version: "0.6.0"
   injectable:
     dependency: transitive
@@ -662,13 +684,21 @@ packages:
     source: hosted
     version: "0.6.7"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
       url: "https://pub.dev"
     source: hosted
     version: "4.8.1"
+  json_serializable:
+    dependency: "direct dev"
+    description:
+      name: json_serializable
+      sha256: aa1f5a8912615733e0fdc7a02af03308933c93235bdc8d50d0b0c8a8ccb0b969
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.7.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -1042,6 +1072,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  source_helper:
+    dependency: transitive
+    description:
+      name: source_helper
+      sha256: "6adebc0006c37dd63fe05bca0a929b99f06402fc95aa35bf36d67f5c06de01fd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.4"
   source_span:
     dependency: transitive
     description:

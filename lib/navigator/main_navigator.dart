@@ -1,3 +1,4 @@
+import 'package:flutter_belgium/model/data/remote_config/remote_config_data.dart';
 import 'package:flutter_belgium/util/locale/localization.dart';
 import 'package:flutter_belgium/widget/raffle/add_participant_dialog.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
@@ -53,4 +54,6 @@ class MainNavigator with BaseNavigator {
     );
     return result == true;
   }
+
+  Future<void> openAppStore() async => launchUrl(Uri.parse(RemoteConfigData.instance.updateUrl));
 }

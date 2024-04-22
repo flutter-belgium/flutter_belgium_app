@@ -7,13 +7,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart';
 import 'package:flutter_belgium/util/firebase/github/github_sign_in_result.dart'
-    as _i2;
-import 'package:impaktfull_architecture/impaktfull_architecture.dart' as _i1;
+    as _i1;
+import 'package:impaktfull_architecture/impaktfull_architecture.dart' as _i2;
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 import '../screen/debug/debug_change_language_screen.dart';
 import '../screen/debug/debug_change_target_platform_screen.dart';
 import '../screen/debug/debug_screen.dart';
+import '../screen/force_update/force_update_screen.dart';
 import '../screen/home/home_screen.dart';
 import '../screen/login/login_screen.dart';
 import '../screen/raffle/raffle_winner_picker_screen.dart';
@@ -29,6 +30,27 @@ mixin BaseNavigator {
         ? (settings.arguments as Map).cast<String, dynamic>()
         : null;
     switch (settings.name) {
+      case RouteNames.gitHubSignInWebviewScreen:
+        return MaterialPageRoute<GithubSignInPageResult>(
+          builder: (_) => GitHubSignInWebviewScreen(
+            clientId: arguments!['clientId'] as String,
+            clientSecret: arguments!['clientSecret'] as String,
+            allowSignUp: arguments!['allowSignUp'] as bool,
+            scope: arguments!['scope'] as String,
+            redirectUrl: arguments!['redirectUrl'] as String,
+            key: arguments?['key'] as Key?,
+          ),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      case RouteNames.homeScreen:
+        return MaterialPageRoute<void>(
+          builder: (_) => HomeScreen(
+            key: arguments?['key'] as Key?,
+          ),
+          settings: settings,
+          fullscreenDialog: false,
+        );
       case RouteNames.splashScreen:
         return MaterialPageRoute<void>(
           builder: (_) => SplashScreen(
@@ -77,22 +99,9 @@ mixin BaseNavigator {
           settings: settings,
           fullscreenDialog: false,
         );
-      case RouteNames.gitHubSignInWebviewScreen:
-        return MaterialPageRoute<GithubSignInPageResult>(
-          builder: (_) => GitHubSignInWebviewScreen(
-            clientId: arguments!['clientId'] as String,
-            clientSecret: arguments!['clientSecret'] as String,
-            allowSignUp: arguments!['allowSignUp'] as bool,
-            scope: arguments!['scope'] as String,
-            redirectUrl: arguments!['redirectUrl'] as String,
-            key: arguments?['key'] as Key?,
-          ),
-          settings: settings,
-          fullscreenDialog: true,
-        );
-      case RouteNames.homeScreen:
+      case RouteNames.forceUpdateScreen:
         return MaterialPageRoute<void>(
-          builder: (_) => HomeScreen(
+          builder: (_) => ForceUpdateScreen(
             key: arguments?['key'] as Key?,
           ),
           settings: settings,
@@ -102,45 +111,13 @@ mixin BaseNavigator {
     return null;
   }
 
-  void goToSplashScreen({_i1.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
-        RouteNames.splashScreen,
-        (_) => false,
-        arguments: {'key': key},
-      );
-  Future<void> goToRaffleWinnerPickerScreen({_i1.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
-        RouteNames.raffleWinnerPickerScreen,
-        arguments: {'key': key},
-      );
-  void goToLoginScreen({_i1.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
-        RouteNames.loginScreen,
-        (_) => false,
-        arguments: {'key': key},
-      );
-  Future<void> goToDebugChangeTargetPlatformScreen({_i1.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
-        RouteNames.debugChangeTargetPlatformScreen,
-        arguments: {'key': key},
-      );
-  Future<void> goToDebugChangeLanguageScreen({_i1.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
-        RouteNames.debugChangeLanguageScreen,
-        arguments: {'key': key},
-      );
-  Future<void> goToDebugScreen({_i1.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
-        RouteNames.debugScreen,
-        arguments: {'key': key},
-      );
-  Future<_i2.GithubSignInPageResult?> goToGitHubSignInWebviewScreen({
+  Future<_i1.GithubSignInPageResult?> goToGitHubSignInWebviewScreen({
     required String clientId,
     required String clientSecret,
     required bool allowSignUp,
     required String scope,
     required String redirectUrl,
-    _i1.Key? key,
+    _i2.Key? key,
   }) async {
     final dynamic result = await navigatorKey.currentState?.pushNamed<dynamic>(
       RouteNames.gitHubSignInWebviewScreen,
@@ -153,12 +130,50 @@ mixin BaseNavigator {
         'key': key
       },
     );
-    return (result as _i2.GithubSignInPageResult?);
+    return (result as _i1.GithubSignInPageResult?);
   }
 
-  void goToHomeScreen({_i1.Key? key}) =>
+  void goToHomeScreen({_i2.Key? key}) =>
       navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.homeScreen,
+        (_) => false,
+        arguments: {'key': key},
+      );
+  void goToSplashScreen({_i2.Key? key}) =>
+      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+        RouteNames.splashScreen,
+        (_) => false,
+        arguments: {'key': key},
+      );
+  Future<void> goToRaffleWinnerPickerScreen({_i2.Key? key}) async =>
+      navigatorKey.currentState?.pushNamed<dynamic>(
+        RouteNames.raffleWinnerPickerScreen,
+        arguments: {'key': key},
+      );
+  void goToLoginScreen({_i2.Key? key}) =>
+      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+        RouteNames.loginScreen,
+        (_) => false,
+        arguments: {'key': key},
+      );
+  Future<void> goToDebugChangeTargetPlatformScreen({_i2.Key? key}) async =>
+      navigatorKey.currentState?.pushNamed<dynamic>(
+        RouteNames.debugChangeTargetPlatformScreen,
+        arguments: {'key': key},
+      );
+  Future<void> goToDebugChangeLanguageScreen({_i2.Key? key}) async =>
+      navigatorKey.currentState?.pushNamed<dynamic>(
+        RouteNames.debugChangeLanguageScreen,
+        arguments: {'key': key},
+      );
+  Future<void> goToDebugScreen({_i2.Key? key}) async =>
+      navigatorKey.currentState?.pushNamed<dynamic>(
+        RouteNames.debugScreen,
+        arguments: {'key': key},
+      );
+  void goToForceUpdateScreen({_i2.Key? key}) =>
+      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+        RouteNames.forceUpdateScreen,
         (_) => false,
         arguments: {'key': key},
       );
@@ -181,6 +196,10 @@ mixin BaseNavigator {
 }
 
 class RouteNames {
+  static const gitHubSignInWebviewScreen = '/git-hub-sign-in-webview';
+
+  static const homeScreen = '/home';
+
   static const splashScreen = '/splash';
 
   static const raffleWinnerPickerScreen = '/raffle-winner-picker';
@@ -194,7 +213,5 @@ class RouteNames {
 
   static const debugScreen = '/debug';
 
-  static const gitHubSignInWebviewScreen = '/git-hub-sign-in-webview';
-
-  static const homeScreen = '/home';
+  static const forceUpdateScreen = '/force-update';
 }

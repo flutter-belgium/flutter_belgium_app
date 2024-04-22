@@ -7,5 +7,6 @@ class AppTheme {
         accent1: ThemeColors.primaryLight,
         accent2: ThemeColors.primaryUltraLight,
         accent3: ThemeColors.primaryUltraLight,
+        assets: ImpaktfullAssets.getDefaults(package: null),
       );
 }
