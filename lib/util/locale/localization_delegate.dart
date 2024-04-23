@@ -17,7 +17,6 @@ class LocalizationDelegate extends LocalizationsDelegate<Localization> {
 
   static const _supportedLocales = [
     Locale.fromSubtags(languageCode: 'en', scriptCode: null, countryCode: null),
-    Locale.fromSubtags(languageCode: 'nl', scriptCode: null, countryCode: null),
   ];
 
   static List<String> get supportedLanguages {

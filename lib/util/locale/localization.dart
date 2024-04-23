@@ -60,71 +60,51 @@ class Localization {
   /// Translations:
   ///
   /// en:  **'Change language'**
-  ///
-  /// nl:  **'Taal veranderen'**
   String get debugChangeLanguageTitle => _t(LocalizationKeys.debugChangeLanguageTitle);
 
   /// Translations:
   ///
   /// en:  **'Change platform'**
-  ///
-  /// nl:  **'Platform veranderen'**
   String get debugChangeTargetPlatform => _t(LocalizationKeys.debugChangeTargetPlatform);
 
   /// Translations:
   ///
   /// en:  **'Change language'**
-  ///
-  /// nl:  **'Taal veranderen'**
   String get debugListItemChangeLangague => _t(LocalizationKeys.debugListItemChangeLangague);
 
   /// Translations:
   ///
   /// en:  **'Debug'**
-  ///
-  /// nl:  **'Debug'**
   String get debugTitle => _t(LocalizationKeys.debugTitle);
 
   /// Translations:
   ///
   /// en:  **'System language'**
-  ///
-  /// nl:  **'Taal van het systeem'**
   String get generalSystemLanguage => _t(LocalizationKeys.generalSystemLanguage);
 
   /// Translations:
   ///
   /// en:  **'Android'**
-  ///
-  /// nl:  **'Android'**
   String get generalSystemTargetAndroid => _t(LocalizationKeys.generalSystemTargetAndroid);
 
   /// Translations:
   ///
   /// en:  **'System'**
-  ///
-  /// nl:  **'Systeem'**
   String get generalSystemTargetDefault => _t(LocalizationKeys.generalSystemTargetDefault);
 
   /// Translations:
   ///
   /// en:  **'iOS'**
-  ///
-  /// nl:  **'iOS'**
   String get generalSystemTargetIos => _t(LocalizationKeys.generalSystemTargetIos);
 
   /// Translations:
   ///
   /// en:  **'You have pushed the button this many times:'**
-  ///
-  /// nl:  **'Je hebt zo veel keer op de knop gedrukt:'**
   String get homeBody => _t(LocalizationKeys.homeBody);
 
   /// Translations:
   ///
   /// en:  **'Flutter Template'**
-  ///
-  /// nl:  **'Flutter Template'**
   String get homeTitle => _t(LocalizationKeys.homeTitle);
 
   String getTranslation(String key, {List<dynamic>? args}) => _t(key, args: args ?? <dynamic>[]);
