@@ -3,4 +3,5 @@ class StoreKeys {
 
   // Shared prefs
   static const locale = 'locale';
+  static const customUserName = 'custom_user_name';
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/model/data/remote_config/remote_config_data.dart';
 import 'package:flutter_belgium/repo/login/login_repo.dart';
@@ -13,19 +12,15 @@ import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 class MainNavigator with BaseNavigator {
   Future<void> goToNextOnboardingScreen() async {
     final loginRepository = getIt<LoginRepository>();
-    if (loginRepository.isLoggedIn) {
-      if (kIsWeb) {
-        if (loginRepository.isAdmin) {
-          goToRaffleScreen();
-          return;
-        }
-        showErrorMessage('This app is only supported for admin users, use the mobile app instead.');
-        return;
-      }
-      goToHomeScreen();
-    } else {
+    if (!loginRepository.isLoggedIn) {
       goToLoginScreen();
+      return;
     }
+    if (!loginRepository.hasUserName) {
+      goToUserNameScreen();
+      return;
+    }
+    goToHomeScreen();
   }
 
   void showError(String title, {required Object error, required StackTrace trace}) {

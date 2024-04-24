@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/model/data/login/login_type.dart';
 import 'package:flutter_belgium/model/data/remote_config/remote_config_data.dart';
 import 'package:flutter_belgium/secrets/github_credentials.dart';
+import 'package:flutter_belgium/theme/store_keys.dart';
 import 'package:flutter_belgium/util/firebase/github/github_sign_in.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
@@ -11,6 +12,7 @@ abstract class LoginRepository {
   @factoryMethod
   factory LoginRepository(
     FirebaseAuth firebaseAuth,
+    SharedPrefsStore sharedPrefsStore,
   ) = _LoginRepository;
 
   bool get isLoggedIn;
@@ -20,6 +22,8 @@ abstract class LoginRepository {
 
   String? get userName;
 
+  bool get hasUserName;
+
   Future<void> init();
 
   Future<void> login(LoginType loginType);
@@ -27,14 +31,20 @@ abstract class LoginRepository {
   Future<void> logout();
 
   Future<void> deleteUser();
+
+  Future<void> saveCustomUserName(String userName);
 }
 
 class _LoginRepository implements LoginRepository {
   final FirebaseAuth _firebaseAuth;
+  final SharedPrefsStore _sharedPrefsStore;
   User? _user;
+
+  String? _customUserName;
 
   _LoginRepository(
     this._firebaseAuth,
+    this._sharedPrefsStore,
   );
 
   @override
@@ -42,6 +52,7 @@ class _LoginRepository implements LoginRepository {
     _firebaseAuth.userChanges().listen((User? user) {
       _user = user;
     });
+    await _getUserName();
   }
 
   @override
@@ -57,7 +68,10 @@ class _LoginRepository implements LoginRepository {
   String? get userId => _user?.uid;
 
   @override
-  String? get userName => _user?.displayName;
+  bool get hasUserName => userName != null;
+
+  @override
+  String? get userName => _user?.displayName ?? _customUserName;
 
   @override
   Future<void> login(LoginType loginType) async {
@@ -100,11 +114,28 @@ class _LoginRepository implements LoginRepository {
   @override
   Future<void> logout() async {
     await _firebaseAuth.signOut();
+    await _removeUserData();
   }
 
   @override
   Future<void> deleteUser() async {
     await _firebaseAuth.currentUser?.delete();
+    await _removeUserData();
+  }
+
+  Future<void> _removeUserData() async {
     _user = null;
+    _customUserName = null;
+    await _sharedPrefsStore.removeKey(key: StoreKeys.customUserName);
+  }
+
+  Future<void> _getUserName() async {
+    _customUserName = await _sharedPrefsStore.getString(key: StoreKeys.customUserName);
+  }
+
+  @override
+  Future<void> saveCustomUserName(String userName) async {
+    _customUserName = userName;
+    await _sharedPrefsStore.saveString(key: StoreKeys.customUserName, value: userName);
   }
 }

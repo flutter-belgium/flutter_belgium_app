@@ -19,6 +19,7 @@ import '../screen/debug/debug_screen.dart';
 import '../screen/force_update/force_update_screen.dart';
 import '../screen/home/home_screen.dart';
 import '../screen/login/login_screen.dart';
+import '../screen/login/user_name_screen.dart';
 import '../screen/raffle/raffle_screen.dart';
 import '../screen/raffle/raffle_winner_picker_screen.dart';
 import '../screen/splash/splash_screen.dart';
@@ -118,6 +119,14 @@ mixin BaseNavigator {
           settings: settings,
           fullscreenDialog: false,
         );
+      case RouteNames.userNameScreen:
+        return MaterialPageRoute<void>(
+          builder: (_) => UserNameScreen(
+            key: arguments?['key'] as Key?,
+          ),
+          settings: settings,
+          fullscreenDialog: false,
+        );
     }
     return null;
   }
@@ -194,6 +203,12 @@ mixin BaseNavigator {
         (_) => false,
         arguments: {'key': key},
       );
+  void goToUserNameScreen({_i2.Key? key}) =>
+      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+        RouteNames.userNameScreen,
+        (_) => false,
+        arguments: {'key': key},
+      );
   void goBack() => navigatorKey.currentState?.pop();
   void goBackWithResult<T>({T? result}) =>
       navigatorKey.currentState?.pop(result);
@@ -233,4 +248,6 @@ class RouteNames {
   static const debugScreen = '/debug';
 
   static const forceUpdateScreen = '/force-update';
+
+  static const userNameScreen = '/user-name';
 }

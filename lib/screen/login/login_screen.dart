@@ -43,10 +43,12 @@ class LoginScreen extends StatelessWidget {
                       onTap: viewModel.onLoginTapped,
                       loginType: LoginType.github,
                     ),
-                    SocialLoginButton(
-                      onTap: viewModel.onLoginTapped,
-                      loginType: LoginType.apple,
-                    ),
+                    if (Platform.isIOS) ...[
+                      SocialLoginButton(
+                        onTap: viewModel.onLoginTapped,
+                        loginType: LoginType.apple,
+                      ),
+                    ],
                   ],
                 ),
               ),
