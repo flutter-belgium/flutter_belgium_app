@@ -8,8 +8,7 @@
 import 'package:flutter/foundation.dart' as _i3;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_belgium/util/firebase/github/github_sign_in_result.dart'
-    as _i1;
+import 'package:flutter_belgium/util/firebase/github/github_sign_in_result.dart' as _i1;
 import 'package:impaktfull_architecture/impaktfull_architecture.dart' as _i2;
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
@@ -30,9 +29,7 @@ mixin BaseNavigator {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    final arguments = settings.arguments is Map
-        ? (settings.arguments as Map).cast<String, dynamic>()
-        : null;
+    final arguments = settings.arguments is Map ? (settings.arguments as Map).cast<String, dynamic>() : null;
     switch (settings.name) {
       case RouteNames.gitHubSignInWebviewScreen:
         return MaterialPageRoute<GithubSignInPageResult>(
@@ -141,87 +138,66 @@ mixin BaseNavigator {
   }) async {
     final dynamic result = await navigatorKey.currentState?.pushNamed<dynamic>(
       RouteNames.gitHubSignInWebviewScreen,
-      arguments: {
-        'clientId': clientId,
-        'clientSecret': clientSecret,
-        'allowSignUp': allowSignUp,
-        'scope': scope,
-        'redirectUrl': redirectUrl,
-        'key': key
-      },
+      arguments: {'clientId': clientId, 'clientSecret': clientSecret, 'allowSignUp': allowSignUp, 'scope': scope, 'redirectUrl': redirectUrl, 'key': key},
     );
     return (result as _i1.GithubSignInPageResult?);
   }
 
-  void goToHomeScreen({_i2.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToHomeScreen({_i2.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.homeScreen,
         (_) => false,
         arguments: {'key': key},
       );
-  void goToSplashScreen({_i2.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToSplashScreen({_i2.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.splashScreen,
         (_) => false,
         arguments: {'key': key},
       );
-  Future<void> goToRaffleWinnerPickerScreen({_i2.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
+  Future<void> goToRaffleWinnerPickerScreen({_i2.Key? key}) async => navigatorKey.currentState?.pushNamed<dynamic>(
         RouteNames.raffleWinnerPickerScreen,
         arguments: {'key': key},
       );
-  void goToRaffleScreen({_i3.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToRaffleScreen({_i3.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.raffleScreen,
         (_) => false,
         arguments: {'key': key},
       );
-  void goToLoginScreen({_i2.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToLoginScreen({_i2.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.loginScreen,
         (_) => false,
         arguments: {'key': key},
       );
-  Future<void> goToDebugChangeTargetPlatformScreen({_i2.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
+  Future<void> goToDebugChangeTargetPlatformScreen({_i2.Key? key}) async => navigatorKey.currentState?.pushNamed<dynamic>(
         RouteNames.debugChangeTargetPlatformScreen,
         arguments: {'key': key},
       );
-  Future<void> goToDebugChangeLanguageScreen({_i2.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
+  Future<void> goToDebugChangeLanguageScreen({_i2.Key? key}) async => navigatorKey.currentState?.pushNamed<dynamic>(
         RouteNames.debugChangeLanguageScreen,
         arguments: {'key': key},
       );
-  Future<void> goToDebugScreen({_i2.Key? key}) async =>
-      navigatorKey.currentState?.pushNamed<dynamic>(
+  Future<void> goToDebugScreen({_i2.Key? key}) async => navigatorKey.currentState?.pushNamed<dynamic>(
         RouteNames.debugScreen,
         arguments: {'key': key},
       );
-  void goToForceUpdateScreen({_i2.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToForceUpdateScreen({_i2.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.forceUpdateScreen,
         (_) => false,
         arguments: {'key': key},
       );
-  void goToUserNameScreen({_i2.Key? key}) =>
-      navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
+  void goToUserNameScreen({_i2.Key? key}) => navigatorKey.currentState?.pushNamedAndRemoveUntil<dynamic>(
         RouteNames.userNameScreen,
         (_) => false,
         arguments: {'key': key},
       );
   void goBack() => navigatorKey.currentState?.pop();
-  void goBackWithResult<T>({T? result}) =>
-      navigatorKey.currentState?.pop(result);
-  void popUntil(bool Function(Route<dynamic>) predicate) =>
-      navigatorKey.currentState?.popUntil(predicate);
-  void goBackTo(String routeName) =>
-      popUntil((route) => route.settings.name == routeName);
+  void goBackWithResult<T>({T? result}) => navigatorKey.currentState?.pop(result);
+  void popUntil(bool Function(Route<dynamic>) predicate) => navigatorKey.currentState?.popUntil(predicate);
+  void goBackTo(String routeName) => popUntil((route) => route.settings.name == routeName);
   Future<T?> showCustomDialog<T>({Widget? widget}) async => showDialog<T>(
         context: navigatorKey.currentContext!,
         builder: (_) => widget ?? const SizedBox.shrink(),
       );
-  Future<T?> showBottomSheet<T>({Widget? widget}) async =>
-      showModalBottomSheet<T>(
+  Future<T?> showBottomSheet<T>({Widget? widget}) async => showModalBottomSheet<T>(
         context: navigatorKey.currentContext!,
         builder: (_) => widget ?? const SizedBox.shrink(),
       );
@@ -240,8 +216,7 @@ class RouteNames {
 
   static const loginScreen = '/login';
 
-  static const debugChangeTargetPlatformScreen =
-      '/debug-change-target-platform';
+  static const debugChangeTargetPlatformScreen = '/debug-change-target-platform';
 
   static const debugChangeLanguageScreen = '/debug-change-language';
 
