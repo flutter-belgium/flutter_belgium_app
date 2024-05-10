@@ -68,7 +68,7 @@ class _LoginRepository implements LoginRepository {
   String? get userId => _user?.uid;
 
   @override
-  bool get hasUserName => userName != null;
+  bool get hasUserName => userName?.isNotEmpty == true;
 
   @override
   String? get userName => _user?.displayName ?? _customUserName;
