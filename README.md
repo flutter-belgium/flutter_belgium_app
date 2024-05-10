@@ -4,13 +4,16 @@ Bringing communities together is what we do best. We are a group of Flutter enth
 
 ## The app
 
-This app has 2 functions (as of now):
+This app has a couple of features:
 
+- Social logins (Github, Apple)
 - Enter raffle to win goodies (during meetups)
 - Pick the raffle winner (during meetups)
+- Release to the app stores (Android & iOS)
+- Meetup agenda
 
 ## Backlog
 
-- Release to the app stores (Android & iOS)
-- Extra social logins (Google Apple)
+- Extra social logins (Google)
+- Rewacht livestreams
 - Push notifications

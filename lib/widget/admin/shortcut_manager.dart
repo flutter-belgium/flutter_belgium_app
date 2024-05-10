@@ -7,7 +7,7 @@ class FortuneWheelIntent extends Intent {
 
 class ShortcutsManager extends StatelessWidget {
   final Widget child;
-  final VoidCallback onStartFortuneWheel;
+  final VoidCallback? onStartFortuneWheel;
 
   const ShortcutsManager({
     required this.child,
@@ -18,16 +18,18 @@ class ShortcutsManager extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shortcuts(
-      shortcuts: const <ShortcutActivator, Intent>{
-        SingleActivator(
-          LogicalKeyboardKey.enter,
-          meta: true,
-        ): FortuneWheelIntent(),
+      shortcuts: <ShortcutActivator, Intent>{
+        if (onStartFortuneWheel != null) ...{
+          const SingleActivator(
+            LogicalKeyboardKey.enter,
+            meta: true,
+          ): const FortuneWheelIntent(),
+        }
       },
       child: Actions(
         actions: <Type, Action<Intent>>{
           FortuneWheelIntent: CallbackAction<FortuneWheelIntent>(
-            onInvoke: (intent) => onStartFortuneWheel(),
+            onInvoke: (intent) => onStartFortuneWheel?.call(),
           ),
         },
         child: Focus(

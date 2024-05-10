@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_belgium/model/data/raffle/participant.dart';
-import 'package:flutter_belgium/style/theme.dart';
-import 'package:flutter_belgium/style/theme_duration.dart';
+import 'package:flutter_belgium/theme/theme_colors.dart';
+import 'package:flutter_belgium/theme/theme_duration.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 
 class CustomFortuneWheel extends StatelessWidget {

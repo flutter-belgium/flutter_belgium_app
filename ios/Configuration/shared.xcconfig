@@ -1,0 +1,3 @@
+#include "Flutter/Generated.xcconfig"
+DEVELOPMENT_TEAM=NX96DQG676
+CODE_SIGN_IDENTITY=iPhone Distribution

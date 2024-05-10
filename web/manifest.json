@@ -1,11 +1,11 @@
 {
-    "name": "flutter_belgium",
+    "name": "Fluter Belgium",
     "short_name": "flutter_belgium",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FFFFFF",
     "theme_color": "#FFFFFF",
-    "description": "A new Flutter project.",
+    "description": "A community app for Flutter Belgium",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

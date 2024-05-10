@@ -11,7 +11,7 @@ class RaffleWinner {
 
   factory RaffleWinner.fromMap(QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot) => RaffleWinner(
         userUid: documentSnapshot.id,
-        name: documentSnapshot.data()['name'],
+        name: documentSnapshot.data()['name'] as String,
       );
 
   Map<String, dynamic> toJson() => {

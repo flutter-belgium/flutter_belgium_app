@@ -6,6 +6,7 @@ plugins {
 
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
+
 if (localPropertiesFile.exists()) {
     localPropertiesFile.withReader('UTF-8') { reader ->
         localProperties.load(reader)
@@ -20,6 +21,16 @@ if (flutterVersionCode == null) {
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
+}
+
+// Keystore Properties
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('keystore.properties')
+
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader('UTF-8') { reader ->
+        keystoreProperties.load(reader)
+    }
 }
 
 android {
@@ -42,19 +53,53 @@ android {
 
     defaultConfig {
         applicationId "be.flutterbelgium.app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../keystore/debug.keystore")
+            storePassword keystoreProperties.getProperty('keystore.debug.password')
+            keyAlias keystoreProperties.getProperty('keystore.debug.alias')
+            keyPassword keystoreProperties.getProperty('keystore.debug.password')
+        }
+        release {
+            storeFile file("../keystore/release.keystore")
+            storePassword keystoreProperties.getProperty('keystore.release.password')
+            keyAlias keystoreProperties.getProperty('keystore.release.alias')
+            keyPassword keystoreProperties.getProperty('keystore.release.password')
+        }
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions "flavors"
+    productFlavors {
+        dev {
+            dimension "flavors"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+        }
+        alpha {
+            dimension "flavors"
+            applicationIdSuffix ".alpha"
+            versionNameSuffix "-alpha"
+        }
+        beta {
+            dimension "flavors"
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+        }
+        prod {
+            dimension "flavors"
         }
     }
 }
@@ -63,4 +108,8 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+  implementation 'com.android.support:multidex:1.0.3'
+}
+
+apply plugin: 'com.google.gms.google-services'

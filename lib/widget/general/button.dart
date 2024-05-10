@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_belgium/di/injectable.dart';
-import 'package:flutter_belgium/navigation/main_navigator.dart';
-import 'package:flutter_belgium/style/theme.dart';
-import 'package:flutter_belgium/widget/general/loading.dart';
+import 'package:flutter_belgium/navigator/main_navigator.dart';
+import 'package:flutter_belgium/theme/theme_colors.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 class Button extends StatefulWidget {
   final AsyncCallback onTap;
@@ -11,12 +10,17 @@ class Button extends StatefulWidget {
   final Widget? child;
   final Color? color;
   final bool fullWidth;
+  final EdgeInsets padding;
 
   const Button({
     required this.onTap,
     required this.text,
     this.color,
     this.fullWidth = true,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 12,
+    ),
     super.key,
   }) : child = null;
 
@@ -25,6 +29,10 @@ class Button extends StatefulWidget {
     required this.child,
     this.color,
     this.fullWidth = true,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 12,
+    ),
     super.key,
   }) : text = null;
 
@@ -43,7 +51,7 @@ class _ButtonState extends State<Button> {
           const SizedBox(
             width: 24,
             height: 24,
-            child: Loading(),
+            child: ImpaktfullLoadingIndicator(),
           ),
         ],
         Opacity(
@@ -65,10 +73,7 @@ class _ButtonState extends State<Button> {
                   ],
                   color: widget.color ?? ThemeColors.primary,
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
+                padding: widget.padding,
                 child: Builder(builder: (context) {
                   if (widget.child != null) return widget.child!;
                   return Text(

@@ -1,0 +1,6 @@
+#include "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
+#include "shared.xcconfig"
+PRODUCT_NAME=Flutter Belgium Beta
+PRODUCT_BUNDLE_IDENTIFIER=be.flutterbelgium.app.beta
+FLUTTER_TARGET=lib/main_beta.dart
+PROVISIONING_PROFILE_SPECIFIER=Flutter Belgium Beta

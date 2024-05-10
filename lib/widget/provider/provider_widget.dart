@@ -1,23 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_belgium/util/locale/localization.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 class ProviderWidget<T extends ChangeNotifier> extends StatelessWidget {
-  final Widget Function(BuildContext context, T viewModel) builder;
+  final Widget Function(
+    BuildContext context,
+    T viewModel,
+  )? builder;
+  final Widget Function(
+    BuildContext context,
+    T viewModel,
+    ImpaktfullTheme theme,
+    Localization localization,
+  )? builderWithThemeAndLocalizations;
   final T Function() create;
 
   const ProviderWidget({
-    required this.builder,
     required this.create,
+    this.builder,
+    this.builderWithThemeAndLocalizations,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<T>(
-      create: (context) => create(),
-      child: Consumer<T>(
-        builder: (context, value, child) => builder(context, value),
-      ),
+    return BaseProviderWidget<T, ImpaktfullTheme, Localization>(
+      create: () => create(),
+      builder: builder,
+      builderWithThemeAndLocalizations: builderWithThemeAndLocalizations,
     );
   }
 }

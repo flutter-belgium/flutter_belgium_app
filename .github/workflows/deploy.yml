@@ -27,6 +27,7 @@ jobs:
           channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
       - run: flutter packages get
       - run: dart analyze
+      - run: dart tools/fix_codebase.dart
       - run: flutter build web
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

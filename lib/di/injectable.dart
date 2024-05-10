@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
 import 'package:flutter_belgium/di/injectable.config.dart';
+import 'package:flutter_belgium/navigator/main_navigator.dart';
+import 'package:flutter_belgium/secrets/airtable_config.dart';
+import 'package:flutter_belgium/service/airtable_service.dart';
+import 'package:flutter_belgium/service/version_check_service.dart';
+import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 final getIt = GetIt.asNewInstance();
 
@@ -16,6 +19,7 @@ final getIt = GetIt.asNewInstance();
 )
 Future<void> configureDependencies() async {
   getIt.initGetIt();
+  await configureImpaktfullArchitecture(GetItHelper(getIt));
   await getIt.allReady();
 }
 
@@ -33,6 +37,22 @@ abstract class RegisterModule {
 
   @lazySingleton
   FirebaseAuth provideFirebaseAuth() => FirebaseAuth.instance;
+
+  @lazySingleton
+  FirebaseRemoteConfig provideRemoteConfig() => FirebaseRemoteConfig.instance;
+
+  @lazySingleton
+  AirtableService providerAirtableService(Dio dio) => AirtableService(
+        personalAccessToken: AirTableConfig.personalAccessToken,
+        projectBase: AirTableConfig.base,
+        dio: dio,
+      );
+
+  @lazySingleton
+  VersionCheckService provideVersionCheckService(MainNavigator mainNavigator) {
+    if (!kIsWeb) return RemoteConfigVersionCheckService(mainNavigator);
+    return NoopVersionCheckService();
+  }
 }
 
 dynamic _parseAndDecode(String response) => jsonDecode(response);
