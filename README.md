@@ -15,5 +15,6 @@ This app has a couple of features:
 ## Backlog
 
 - Extra social logins (Google)
+- Disable FadeIn route transitions
 - Rewacht livestreams
 - Push notifications
