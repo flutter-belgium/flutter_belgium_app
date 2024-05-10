@@ -71,7 +71,14 @@ class _LoginRepository implements LoginRepository {
   bool get hasUserName => userName?.isNotEmpty == true;
 
   @override
-  String? get userName => _user?.displayName ?? _customUserName;
+  String? get userName {
+    final user = _user;
+    if (user == null) return _customUserName;
+    final displayName = user.displayName;
+    if (displayName == null) return _customUserName;
+    if (displayName.isEmpty) return _customUserName;
+    return displayName;
+  }
 
   @override
   Future<void> login(LoginType loginType) async {
