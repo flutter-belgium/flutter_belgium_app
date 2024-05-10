@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/model/data/remote_config/remote_config_data.dart';
 import 'package:flutter_belgium/repo/login/login_repo.dart';
@@ -19,10 +18,6 @@ class MainNavigator with BaseNavigator {
     }
     if (!loginRepository.hasUserName) {
       goToUserNameScreen();
-      return;
-    }
-    if (kIsWeb) {
-      goToRaffleScreen();
       return;
     }
     goToHomeScreen();
