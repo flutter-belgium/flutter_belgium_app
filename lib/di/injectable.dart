@@ -49,9 +49,9 @@ abstract class RegisterModule {
       );
 
   @lazySingleton
-  VersionCheckService provideVersionCheckService(MainNavigator mainNavigator) {
+  ImpaktfullVersionCheckService provideVersionCheckService(MainNavigator mainNavigator) {
     if (!kIsWeb) return RemoteConfigVersionCheckService(mainNavigator);
-    return NoopVersionCheckService();
+    return ImpaktfullNoopVersionCheckService();
   }
 }
 
