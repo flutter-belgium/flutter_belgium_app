@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/viewmodel/settings/settings_viewmodel.dart';
 import 'package:flutter_belgium/widget/provider/provider_widget.dart';
@@ -12,19 +13,20 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<SettingsViewmodel>(
       create: () => getIt()..init(),
-      builder: (context, viewModel) => ImpaktfullScreen(
+      builder: (context, viewModel) => ImpaktfullUiScreen(
         title: 'Settings',
-        child: ImpaktfullListView(
+        child: ImpaktfullUiListView(
+          padding: const EdgeInsets.all(16),
           children: [
-            ImpaktfullSeparatedColumn(
+            ImpaktfullUiSeparatedColumn(
               title: 'Account',
-              type: ImpaktfullSeparatorType.card,
               children: [
-                ImpaktfullListItem.danger(
+                ImpaktfullUiListItem(
+                  type: ImpaktfullUiListItemType.danger,
                   title: 'Delete account',
                   onAsyncTap: viewModel.onDeleteAccountTapped,
                 ),
-                ImpaktfullListItem(
+                ImpaktfullUiListItem(
                   title: 'Sign out',
                   onAsyncTap: viewModel.onSignOutTapped,
                 ),

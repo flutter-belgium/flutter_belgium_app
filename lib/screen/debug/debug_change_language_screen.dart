@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/viewmodel/debug/debug_change_language_viewmodel.dart';
@@ -14,24 +15,23 @@ class DebugChangeLanguageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<DebugChangeLanguageViewModel>(
       create: () => getIt()..init(),
-      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullScreen(
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullUiScreen(
         title: localization.debugChangeLanguageTitle,
         onBackTapped: viewModel.onBackTapped,
-        child: ImpaktfullListView(
+        child: ImpaktfullUiListView(
           children: [
-            ImpaktfullSeparatedColumn(
-              type: ImpaktfullSeparatorType.card,
+            ImpaktfullUiSeparatedColumn(
               children: [
                 for (final item in viewModel.supportedLocales)
-                  ImpaktfullSimpleListItem(
+                  ImpaktfullUiSimpleListItem(
                     title: viewModel.getTranslatedLocale(item, localization),
                     onTap: () => viewModel.onLocaleTapped(item),
-                    trailingWidget: viewModel.isLocaleSelected(item)
-                        ? Icon(
-                            Icons.check,
-                            size: 16,
-                            color: theme.colors.accent1,
-                          )
+                    trailingWidgetBuilder: viewModel.isLocaleSelected(item)
+                        ? (context) => Icon(
+                              Icons.check,
+                              size: 16,
+                              color: theme.colors.accent,
+                            )
                         : null,
                   ),
               ],

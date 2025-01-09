@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_belgium/navigator/main_navigator.dart';
 import 'package:flutter_belgium/util/locale/localization.dart';
 import 'package:flutter_belgium/viewmodel/global/translations_viewmodel.dart';

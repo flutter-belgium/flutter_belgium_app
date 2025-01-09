@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/viewmodel/login/user_name_viewmodel.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:flutter_belgium/di/injectable.dart';
@@ -16,21 +17,24 @@ class UserNameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<UserNameViewModel>(
       create: () => getIt()..init(),
-      builder: (context, viewModel) => ImpaktfullScreen(
+      builder: (context, viewModel) => ImpaktfullUiScreen(
         title: 'What is your name?',
-        bottomAction: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: ImpaktfullButton.primary(
-              label: 'Save',
-              onTap: viewModel.onSaveTapped,
-            ),
-          ),
-        ),
-        child: ImpaktfullListView(
+        bottomChild: ImpaktfullUiBottomActions(
           children: [
-            ImpaktfullInputField(
-              hintText: 'Enter your name',
+            ImpaktfullUiButton(
+              type: ImpaktfullUiButtonType.primary,
+              title: 'Save',
+              fullWidth: true,
+              onTap: viewModel.onSaveTapped,
+            )
+          ],
+        ),
+        child: ImpaktfullUiListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            ImpaktfullUiInputField(
+              label: 'Your name',
+              value: viewModel.userName,
               onChanged: viewModel.onUserNameUpdated,
             ),
           ],

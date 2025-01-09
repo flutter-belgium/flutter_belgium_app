@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_belgium/model/data/remote_config/remote_config_data.dart';
 import 'package:flutter_belgium/util/flavor/flavor_config.dart';

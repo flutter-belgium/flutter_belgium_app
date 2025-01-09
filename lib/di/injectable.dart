@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -26,11 +24,7 @@ Future<void> configureDependencies() async {
 @module
 abstract class RegisterModule {
   @lazySingleton
-  Dio provideDio() {
-    final dio = Dio();
-    (dio.transformer as BackgroundTransformer).jsonDecodeCallback = parseJson;
-    return dio;
-  }
+  Dio provideDio() => Dio();
 
   @lazySingleton
   FirebaseFirestore provideFirebaseFirestore() => FirebaseFirestore.instance;
@@ -54,7 +48,3 @@ abstract class RegisterModule {
     return ImpaktfullNoopVersionCheckService();
   }
 }
-
-dynamic _parseAndDecode(String response) => jsonDecode(response);
-
-dynamic parseJson(String text) => compute<String, dynamic>(_parseAndDecode, text);

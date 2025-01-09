@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/model/data/event/talk.dart';
 import 'package:flutter_belgium/repo/talk/talk_repostitory.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';

@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/viewmodel/force_update/force_update_viewmodel.dart';
 import 'package:flutter_belgium/widget/provider/provider_widget.dart';
@@ -16,22 +17,23 @@ class ForceUpdateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<ForceUpdateViewModel>(
       create: () => getIt()..init(),
-      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullScreen(
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullUiScreen(
         title: 'Force Update',
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: ImpaktfullAutoLayout.vertical(
+          child: ImpaktfullUiAutoLayout.vertical(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             spacing: 8,
             children: [
               Text(
                 'Install the latest version to keep using the app.',
-                style: theme.textStyles.onCanvasPrimary.body,
+                style: theme.textStyles.onCanvas.text.small,
                 textAlign: TextAlign.center,
               ),
-              ImpaktfullButton.primary(
-                label: 'Update',
+              ImpaktfullUiButton(
+                type: ImpaktfullUiButtonType.primary,
+                title: 'Update',
                 onTap: viewModel.onUpdateTapped,
               ),
             ],

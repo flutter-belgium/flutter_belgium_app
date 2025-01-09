@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/navigator/main_navigator.dart';
 import 'package:flutter_belgium/util/locale/localization.dart';
 import 'package:flutter_belgium/viewmodel/global/global_viewmodel.dart';

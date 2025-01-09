@@ -10,7 +10,7 @@ import 'package:flutter_belgium/theme/theme_duration.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @injectable
-class RaffleWinnerPickerViewModel with ChangeNotifier {
+class RaffleWinnerPickerViewModel extends ChangeNotifierEx {
   final RaffleRepository _raffleRepository;
   final MainNavigator _mainNavigator;
 
