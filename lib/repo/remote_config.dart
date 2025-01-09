@@ -4,9 +4,9 @@ import 'package:flutter_belgium/util/flavor/flavor_config.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @LazySingleton(
-  as: RemoteConfigRepository,
+  as: ImpaktfullRemoteConfigRepository,
 )
-class AppRemoteConfigRepository extends RemoteConfigRepository<RemoteConfigData> {
+class AppRemoteConfigRepository extends ImpaktfullRemoteConfigRepository<RemoteConfigData> {
   final FirebaseRemoteConfig _firebaseRemoteConfig;
 
   AppRemoteConfigRepository(

@@ -1,10 +1,10 @@
 name: flutter_belgium
 description: The Flutter Belgium app to connect with the community.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.4+1
 
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+  sdk: ">=3.2.0 <4.0.0"
 
 dependencies:
   confetti: ^0.7.0
@@ -18,7 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_navigation_generator_annotations: ^1.0.1
-  impaktfull_architecture: ^0.1.1
+  impaktfull_architecture: ^0.8.1
   json_annotation: ^4.8.1
   sprintf: ^7.0.0
   rxdart: ^0.27.0
@@ -51,5 +51,5 @@ flutter:
         - asset: assets/font/ubuntu/ubuntu_regular.ttf
 
 locale_gen:
-  default_language: 'en'
-  languages: ['en']
+  default_language: "en"
+  languages: ["en"]
