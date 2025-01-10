@@ -11,7 +11,7 @@ class BuildConfig {
   static const opUuidAppleAccount = ImpaktfullCliSecrets.opUuidAppleAccount;
 
   // AppCenter Config
-  static const appCenterOwnerName = 'ImpaktfullUiUi';
+  static const appCenterOwnerName = 'Impaktfull';
   static const appCenterDistributionGroups = [
     AppCenterUploadConfig.defaultDistributionGroup,
   ];
