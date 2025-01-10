@@ -658,6 +658,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.15.3"
+  impaktfull_translations:
+    dependency: "direct dev"
+    description:
+      name: impaktfull_translations
+      sha256: ee65d2baa0d6ebdb1f0df577565e4e6170ee5239933da21bffc1eca956b68e53
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   impaktfull_ui:
     dependency: "direct main"
     description:
@@ -763,7 +771,7 @@ packages:
     source: hosted
     version: "5.1.1"
   locale_gen:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: locale_gen
       sha256: "648eb2d675560a995b0db1b2ecc9331b828a442a95f63f277164c4030b9254c5"

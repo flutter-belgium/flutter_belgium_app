@@ -124,8 +124,4 @@ class RaffleViewModel extends ChangeNotifierEx {
   void onStartFortuneWheel() {
     _mainNavigator.goToRaffleWinnerPickerScreen();
   }
-
-  void onTripleTapLogo() {
-    _mainNavigator.showMessage('Raffle: $_raffle, $_hasAlreadyWonRaffle, $_hasEnteredRaffle');
-  }
 }
