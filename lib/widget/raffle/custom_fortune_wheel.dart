@@ -20,6 +20,7 @@ class CustomFortuneWheel extends StatelessWidget {
     return RandomWheel(
       animation: animation,
       winnerIndex: winnerIndex,
+      wheelType: WheelType.values[participants.length % WheelType.values.length],
       children: participants
           .map(
             (participant) => Text(

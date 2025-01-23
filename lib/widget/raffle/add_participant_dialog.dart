@@ -38,7 +38,9 @@ class _AddParticipantDialogState extends State<AddParticipantDialog> {
       ],
       child: TextField(
         controller: textController,
+        onSubmitted: (_) => Navigator.of(context).pop(textController.text),
         cursorColor: ThemeColors.primary,
+        focusNode: FocusNode()..requestFocus(),
         decoration: const InputDecoration(
           hintText: 'Name',
           focusedBorder: UnderlineInputBorder(

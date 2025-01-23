@@ -114,7 +114,7 @@ class RaffleWinnerPickerViewModel extends ChangeNotifierEx {
   Future<void> onAddParticipantTapped() async {
     final docId = _raffle?.id;
     if (docId == null) {
-      _mainNavigator.showErrorMessage('Failed to make raffle active (no raffle available)');
+      _mainNavigator.showErrorMessage('Failed to add participant (no raffle available)');
       return;
     }
     final name = await _mainNavigator.goToAddParticipantDialog();

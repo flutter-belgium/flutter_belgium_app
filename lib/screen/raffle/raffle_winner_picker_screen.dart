@@ -1,5 +1,5 @@
-import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/theme/theme_colors.dart';
 import 'package:flutter_belgium/viewmodel/raffle/raffle_winner_picker_viewmodel.dart';
 import 'package:flutter_belgium/widget/general/button.dart';

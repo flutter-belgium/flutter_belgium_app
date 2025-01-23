@@ -3,5 +3,5 @@ class ThemeDuration {
 
   static const confettiDuration = Duration(seconds: 5);
 
-  static const raffleWheelDuration = Duration(seconds: 3);
+  static const raffleWheelDuration = Duration(seconds: 10);
 }
