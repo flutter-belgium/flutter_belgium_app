@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/navigator/main_navigator.navigator.dart';
 import 'package:flutter_belgium/theme/app_theme.dart';
 import 'package:flutter_belgium/widget/debug/flavor_flag.dart';
@@ -13,9 +14,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return DependencyTreeWidget(
       builder: (context, globalViewModel, translationsViewmodel, mainNavigator) => FlavorBanner(
-        child: ImpaktfullApp(
+        child: ImpaktfullUiApp(
           title: 'Flutter Belgium',
-          impaktfullTheme: AppTheme.getTheme(),
+          impaktfullUiTheme: AppTheme.getTheme(),
           locale: translationsViewmodel.locale,
           supportedLocales: translationsViewmodel.supportedLocales,
           localizationsDelegates: translationsViewmodel.localizationDelegates,

@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/viewmodel/talk/talks_viewmodel.dart';
 import 'package:flutter_belgium/widget/provider/provider_widget.dart';
@@ -14,11 +15,13 @@ class TalksScreen extends StatelessWidget {
     return ProviderWidget<TalksViewmodel>(
       create: () => getIt()..init(),
       builder: (context, viewModel) {
-        return ImpaktfullScreen(
+        return ImpaktfullUiScreen(
           title: 'Talks',
-          child: ImpaktfullListView.builder(
+          child: ImpaktfullUiListView.builder(
             items: viewModel.talks,
+            spacing: 8,
             isLoading: viewModel.isLoading,
+            padding: const EdgeInsets.all(16),
             itemBuilder: (context, item, index) => TalkListItem(
               talk: item,
               onTap: () => viewModel.onTalkTapped(item),

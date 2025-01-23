@@ -1,6 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_belgium/model/data/login/login_type.dart';
 import 'package:flutter_belgium/theme/theme_assets.dart';
-import 'package:flutter_belgium/theme/theme_colors.dart';
 import 'package:flutter_belgium/viewmodel/login/login_viewmodel.dart';
 import 'package:flutter_belgium/widget/social_login/social_login_button.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
@@ -33,10 +35,10 @@ class LoginScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
-              color: ThemeColors.primaryUltraLight,
+              color: theme.colors.card2,
               child: SafeArea(
                 top: false,
-                child: ImpaktfullAutoLayout.vertical(
+                child: ImpaktfullUiAutoLayout.vertical(
                   spacing: 8,
                   children: [
                     SocialLoginButton(

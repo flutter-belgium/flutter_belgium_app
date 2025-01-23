@@ -1,4 +1,5 @@
 import 'package:flutter_belgium/di/injectable.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/theme/theme_colors.dart';
 import 'package:flutter_belgium/viewmodel/raffle/raffle_winner_picker_viewmodel.dart';
 import 'package:flutter_belgium/widget/general/button.dart';
@@ -25,7 +26,7 @@ class _RaffleWinnerPickerScreenState extends State<RaffleWinnerPickerScreen> wit
   Widget build(BuildContext context) {
     return ProviderWidget<RaffleWinnerPickerViewModel>(
       create: () => getIt()..init(this),
-      builder: (context, viewModel) => ImpaktfullScreen(
+      builder: (context, viewModel) => ImpaktfullUiScreen(
         child: Builder(builder: (context) {
           if (viewModel.hasInactiveRaffle) {
             return Center(
@@ -98,7 +99,7 @@ class _RaffleWinnerPickerScreenState extends State<RaffleWinnerPickerScreen> wit
                 child: SafeArea(
                   child: Builder(builder: (context) {
                     if (viewModel.isLoading) {
-                      return const ImpaktfullLoadingIndicator();
+                      return const ImpaktfullUiLoadingIndicator();
                     }
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -8,8 +8,8 @@ part of 'remote_config_data.dart';
 
 RemoteConfigData _$RemoteConfigDataFromJson(Map<String, dynamic> json) => RemoteConfigData(
       adminIds: (json['adminIds'] as List<dynamic>).map((e) => e as String).toList(),
-      latestVersionCode: json['latestVersionCode'] as int,
-      minVersionCode: json['minVersionCode'] as int,
+      latestVersionCode: (json['latestVersionCode'] as num).toInt(),
+      minVersionCode: (json['minVersionCode'] as num).toInt(),
       updateUrl: json['updateUrl'] as String,
     );
 

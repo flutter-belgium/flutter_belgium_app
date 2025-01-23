@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_belgium/repo/locale/locale_repository.dart';
 import 'package:flutter_belgium/util/locale/localization.dart';

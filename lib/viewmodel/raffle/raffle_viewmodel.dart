@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:confetti/confetti.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/model/data/raffle/raffle.dart';
 import 'package:flutter_belgium/navigator/main_navigator.dart';
 import 'package:flutter_belgium/repo/login/login_repo.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_belgium/theme/theme_duration.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @injectable
-class RaffleViewModel with ChangeNotifier {
+class RaffleViewModel extends ChangeNotifierEx {
   final LoginRepository _loginRepository;
   final RaffleRepository _raffleRepository;
   final MainNavigator _mainNavigator;

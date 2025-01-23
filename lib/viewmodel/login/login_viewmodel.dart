@@ -1,12 +1,13 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/model/data/login/login_type.dart';
 import 'package:flutter_belgium/navigator/main_navigator.dart';
 import 'package:flutter_belgium/repo/login/login_repo.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @injectable
-class LoginViewModel with ChangeNotifier {
+class LoginViewModel extends ChangeNotifierEx {
   final LoginRepository _loginRepository;
   final MainNavigator _mainNavigator;
 

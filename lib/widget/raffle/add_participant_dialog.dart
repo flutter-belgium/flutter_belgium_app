@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_belgium/theme/theme_colors.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
@@ -21,12 +22,20 @@ class _AddParticipantDialogState extends State<AddParticipantDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return ImpaktfullDialog(
+    return ImpaktfullUiModal(
       title: 'Add new participant',
-      secondaryLabel: 'cancel',
-      onSecondaryTapped: () => Navigator.of(context).pop(),
-      primaryLabel: 'Add participant',
-      onPrimaryTapped: () async => Navigator.of(context).pop(textController.text),
+      actions: [
+        ImpaktfullUiButton(
+          type: ImpaktfullUiButtonType.secondary,
+          title: 'Cancel',
+          onTap: () => Navigator.of(context).pop(),
+        ),
+        ImpaktfullUiButton(
+          type: ImpaktfullUiButtonType.primary,
+          title: 'Add participant',
+          onTap: () async => Navigator.of(context).pop(textController.text),
+        ),
+      ],
       child: TextField(
         controller: textController,
         cursorColor: ThemeColors.primary,

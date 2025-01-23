@@ -11,7 +11,7 @@ import 'package:flutter_crazy_fortune_wheel/flutter_crazy_fortune_wheel.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @injectable
-class RaffleWinnerPickerViewModel with ChangeNotifier {
+class RaffleWinnerPickerViewModel extends ChangeNotifierEx {
   final RaffleRepository _raffleRepository;
   final MainNavigator _mainNavigator;
 

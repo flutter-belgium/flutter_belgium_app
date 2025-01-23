@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/viewmodel/event/events_viewmodel.dart';
 import 'package:flutter_belgium/widget/event/event_list_item.dart';
@@ -14,12 +15,13 @@ class EventsScreen extends StatelessWidget {
     return ProviderWidget<EventsViewmodel>(
       create: () => getIt()..init(),
       builder: (context, viewModel) {
-        return ImpaktfullScreen(
+        return ImpaktfullUiScreen(
           title: 'Events',
-          child: ImpaktfullListView.builder(
+          child: ImpaktfullUiListView.builder(
             items: viewModel.events,
             spacing: 8,
             isLoading: viewModel.isLoading,
+            padding: const EdgeInsets.all(16),
             itemBuilder: (context, item, index) => EventListItem(
               event: item,
               onTap: () => viewModel.onEventTap(item),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_belgium/model/data/login/login_type.dart';
 import 'package:flutter_belgium/theme/theme_assets.dart';
 import 'package:flutter_belgium/theme/theme_colors.dart';
@@ -20,7 +21,7 @@ class SocialLoginButton extends StatelessWidget {
       onTap: () async => onTap(loginType),
       color: _getBackgroundColor(),
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ImpaktfullAutoLayout.horizontal(
+      child: ImpaktfullUiAutoLayout.horizontal(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
