@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:confetti/confetti.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_belgium/model/data/raffle/participant.dart';
 import 'package:flutter_belgium/model/data/raffle/raffle.dart';
 import 'package:flutter_belgium/navigator/main_navigator.dart';
