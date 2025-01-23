@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/navigator/main_navigator.dart';
 import 'package:flutter_belgium/util/firebase/github/github_sign_in_result.dart';
@@ -60,7 +61,7 @@ class _GitHubSignInWebviewScreenState extends State<GitHubSignInWebviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ImpaktfullScreen(
+    return ImpaktfullUiScreen(
       title: 'GitHub Sign In',
       isFullScreen: true,
       onBackTapped: getIt<MainNavigator>().goBack,

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_belgium/theme/theme_assets.dart';
-import 'package:flutter_belgium/theme/theme_colors.dart';
 import 'package:flutter_belgium/viewmodel/raffle/raffle_viewmodel.dart';
 import 'package:flutter_belgium/widget/admin/shortcut_manager.dart';
 import 'package:flutter_belgium/widget/general/tripple_tap_detector.dart';
@@ -24,7 +24,7 @@ class RaffleScreen extends StatelessWidget {
       create: () => getIt()..init(),
       builder: (context, viewModel) => ShortcutsManager(
         onStartFortuneWheel: kIsWeb ? viewModel.onStartFortuneWheel : null,
-        child: ImpaktfullScreen(
+        child: ImpaktfullUiScreen(
           title: 'Raffle',
           child: Stack(
             children: [
@@ -68,13 +68,13 @@ class RaffleScreen extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(16),
-                    color: ThemeColors.primaryUltraLight,
+                    color: theme.colors.card2,
                     alignment: Alignment.center,
                     child: SafeArea(
                       top: false,
                       child: Builder(builder: (context) {
                         if (viewModel.isLoading) {
-                          return const ImpaktfullLoadingIndicator();
+                          return const ImpaktfullUiLoadingIndicator();
                         }
                         if (viewModel.hasAlreadyWonRaffle) {
                           return Text(
@@ -89,14 +89,15 @@ class RaffleScreen extends StatelessWidget {
                           );
                         }
                         if (viewModel.hasRaffle) {
-                          return ImpaktfullButton.primary(
-                            label: 'Enter raffle',
+                          return ImpaktfullUiButton(
+                            type: ImpaktfullUiButtonType.primary,
+                            title: 'Enter raffle',
                             onTap: viewModel.onEnterRaffleTapped,
                           );
                         }
                         return Text(
                           'No raffle today',
-                          style: Theme.of(context).textTheme.labelLarge,
+                          style: theme.textStyles.onCard.text.small,
                         );
                       }),
                     ),

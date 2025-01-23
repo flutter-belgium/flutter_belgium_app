@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_belgium/model/data/event/event.dart';
 import 'package:flutter_belgium/repo/event/event_repostitory.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';

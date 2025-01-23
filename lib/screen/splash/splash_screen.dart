@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_belgium/viewmodel/splash/splash_viewmodel.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
 import 'package:flutter_belgium/di/injectable.dart';
@@ -16,9 +17,9 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<SplashViewModel>(
       create: () => getIt()..init(),
-      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => const ImpaktfullScreen(
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => const ImpaktfullUiScreen(
         child: Center(
-          child: ImpaktfullLoadingIndicator(),
+          child: ImpaktfullUiLoadingIndicator(),
         ),
       ),
     );

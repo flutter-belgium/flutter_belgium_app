@@ -15,22 +15,14 @@ class SettingsViewmodel extends ChangeNotifierEx {
   Future<void> init() async {}
 
   Future<void> onDeleteAccountTapped() async {
-    final result = await _mainNavigator.showConfimDialog(
-      title: 'Delete account',
-      body: 'Are you sure you want to delete your account',
-      primaryLabel: 'Delete account',
-    );
+    final result = await _mainNavigator.showDeleteAccountDialog();
     if (result != true) return;
     await _loginRepo.deleteUser();
     _mainNavigator.goToLoginScreen();
   }
 
   Future<void> onSignOutTapped() async {
-    final result = await _mainNavigator.showConfimDialog(
-      title: 'Logout',
-      body: 'Are you sure you want to logout',
-      primaryLabel: 'Logout',
-    );
+    final result = await _mainNavigator.showLogoutDialog();
     if (result != true) return;
     await _loginRepo.logout();
     _mainNavigator.goToLoginScreen();

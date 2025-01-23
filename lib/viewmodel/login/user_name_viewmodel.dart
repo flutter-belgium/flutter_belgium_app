@@ -5,7 +5,7 @@ import 'package:flutter_belgium/repo/login/login_repo.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @injectable
-class UserNameViewModel with ChangeNotifier {
+class UserNameViewModel extends ChangeNotifierEx {
   final LoginRepository _loginRepository;
   final MainNavigator _mainNavigator;
 
@@ -13,6 +13,8 @@ class UserNameViewModel with ChangeNotifier {
   var _userName = '';
 
   bool get isLoading => _isLoading;
+
+  String get userName => _userName;
 
   UserNameViewModel(
     this._loginRepository,

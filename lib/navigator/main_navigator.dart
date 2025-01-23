@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/model/data/remote_config/remote_config_data.dart';
 import 'package:flutter_belgium/repo/login/login_repo.dart';
@@ -52,23 +53,50 @@ class MainNavigator with BaseNavigator {
     required String body,
     required String primaryLabel,
     String secondaryLabel = 'Cancel',
+    bool isDanger = false,
   }) async {
     final localization = Localization.of(navigatorKey.currentContext!);
-
-    final result = await showDialog<bool>(
+    final result = await ImpaktfullUiModal.show(
       context: navigatorKey.currentContext!,
-      builder: (context) => ImpaktfullDialog(
+      builder: (context) => ImpaktfullUiModal(
         title: localization.getTranslation(title),
-        body: localization.getTranslation(body),
-        primaryButtonType: ImpaktfullDialogPrimaryButtonType.danger,
-        secondaryLabel: localization.getTranslation(secondaryLabel),
-        primaryLabel: localization.getTranslation(primaryLabel),
-        onPrimaryTapped: () => goBackWithResult(result: true),
-        onSecondaryTapped: () => goBackWithResult(result: false),
+        hasClose: false,
+        actions: [
+          ImpaktfullUiButton(
+            type: ImpaktfullUiButtonType.secondary,
+            title: localization.getTranslation(secondaryLabel),
+            onTap: () => goBackWithResult(result: false),
+          ),
+          ImpaktfullUiButton(
+            type: isDanger ? ImpaktfullUiButtonType.destructivePrimary : ImpaktfullUiButtonType.primary,
+            title: localization.getTranslation(primaryLabel),
+            onTap: () => goBackWithResult(result: true),
+          ),
+        ],
+        child: SizedBox(
+          width: double.infinity,
+          child: Text(
+            localization.getTranslation(body),
+            style: theme.textStyles.onCard.text.small,
+          ),
+        ),
       ),
     );
     return result == true;
   }
 
   Future<void> openAppStore() async => launchUrl(Uri.parse(RemoteConfigData.instance.updateUrl));
+
+  Future<bool?> showLogoutDialog() => showConfimDialog(
+        title: 'Logout',
+        body: 'Are you sure you want to logout',
+        primaryLabel: 'Logout',
+      );
+
+  Future<bool> showDeleteAccountDialog() => showConfimDialog(
+        title: 'Delete account',
+        body: 'Are you sure you want to delete your account',
+        primaryLabel: 'Delete',
+        isDanger: true,
+      );
 }

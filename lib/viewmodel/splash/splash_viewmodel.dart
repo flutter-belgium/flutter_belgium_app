@@ -3,7 +3,7 @@ import 'package:flutter_belgium/navigator/main_navigator.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @injectable
-class SplashViewModel with ChangeNotifier {
+class SplashViewModel extends ChangeNotifierEx {
   final MainNavigator _mainNavigator;
   final ImpaktfullRemoteConfigRepository<RemoteConfigData> _remoteConfigRepo;
   final ImpaktfullVersionCheckRepository _versionCheckRepo;
