@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_belgium/theme/theme_assets.dart';
 import 'package:flutter_belgium/viewmodel/raffle/raffle_viewmodel.dart';
 import 'package:flutter_belgium/widget/admin/shortcut_manager.dart';
-import 'package:flutter_belgium/widget/general/tripple_tap_detector.dart';
 import 'package:flutter_belgium/widget/raffle/custom_confetti.dart';
 import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/widget/provider/provider_widget.dart';
@@ -22,10 +21,10 @@ class RaffleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<RaffleViewModel>(
       create: () => getIt()..init(),
-      builder: (context, viewModel) => ShortcutsManager(
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ShortcutsManager(
         onStartFortuneWheel: kIsWeb ? viewModel.onStartFortuneWheel : null,
         child: ImpaktfullUiScreen(
-          title: 'Raffle',
+          title: localization.raffleTitle,
           child: Stack(
             children: [
               Column(
@@ -37,11 +36,8 @@ class RaffleScreen extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            TripleTapDetector(
-                              onTripleTap: viewModel.onTripleTapLogo,
-                              child: SvgPicture.asset(
-                                ThemeAssets.flutterBelgiumLogo,
-                              ),
+                            SvgPicture.asset(
+                              ThemeAssets.flutterBelgiumLogo,
                             ),
                             const SizedBox(height: 32),
                             RichText(
@@ -50,11 +46,11 @@ class RaffleScreen extends StatelessWidget {
                                 style: Theme.of(context).textTheme.headlineSmall,
                                 children: [
                                   TextSpan(
-                                    text: 'Thanks ${viewModel.user} for attending the meetup ',
+                                    text: localization.raffleBodyThanks(viewModel.user),
                                   ),
                                   if (viewModel.meetupLocation != null) ...[
                                     TextSpan(
-                                      text: 'at ${viewModel.meetupLocation}',
+                                      text: localization.raffleBodyLocation(viewModel.meetupLocation!),
                                     ),
                                   ],
                                 ],
@@ -78,25 +74,25 @@ class RaffleScreen extends StatelessWidget {
                         }
                         if (viewModel.hasAlreadyWonRaffle) {
                           return Text(
-                            "You already won today",
+                            localization.raffleBodyAlreadyWonToday,
                             style: Theme.of(context).textTheme.labelLarge,
                           );
                         }
                         if (viewModel.hasEnteredRaffle) {
                           return Text(
-                            "You already entered today's raffle",
+                            localization.raffleBodyAlreadyEntered,
                             style: Theme.of(context).textTheme.labelLarge,
                           );
                         }
                         if (viewModel.hasRaffle) {
                           return ImpaktfullUiButton(
                             type: ImpaktfullUiButtonType.primary,
-                            title: 'Enter raffle',
+                            title: localization.raffleBodyEnterBtn,
                             onTap: viewModel.onEnterRaffleTapped,
                           );
                         }
                         return Text(
-                          'No raffle today',
+                          localization.raffleBodyNoRaffle,
                           style: theme.textStyles.onCard.text.small,
                         );
                       }),

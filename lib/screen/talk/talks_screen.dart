@@ -14,22 +14,20 @@ class TalksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<TalksViewmodel>(
       create: () => getIt()..init(),
-      builder: (context, viewModel) {
-        return ImpaktfullUiScreen(
-          title: 'Talks',
-          child: ImpaktfullUiListView.builder(
-            items: viewModel.talks,
-            spacing: 8,
-            isLoading: viewModel.isLoading,
-            padding: const EdgeInsets.all(16),
-            itemBuilder: (context, item, index) => TalkListItem(
-              talk: item,
-              onTap: () => viewModel.onTalkTapped(item),
-            ),
-            noDataLabel: 'No talks found',
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullUiScreen(
+        title: localization.talksListTitle,
+        child: ImpaktfullUiListView.builder(
+          items: viewModel.talks,
+          spacing: 8,
+          isLoading: viewModel.isLoading,
+          padding: const EdgeInsets.all(16),
+          itemBuilder: (context, item, index) => TalkListItem(
+            talk: item,
+            onTap: () => viewModel.onTalkTapped(item),
           ),
-        );
-      },
+          noDataLabel: localization.talksListNoData,
+        ),
+      ),
     );
   }
 }

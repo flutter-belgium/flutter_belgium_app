@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_belgium/theme/theme_colors.dart';
+import 'package:flutter_belgium/widget/provider/app_theme_localizer.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 class AddParticipantDialog extends StatefulWidget {
@@ -22,29 +23,31 @@ class _AddParticipantDialogState extends State<AddParticipantDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return ImpaktfullUiModal(
-      title: 'Add new participant',
-      actions: [
-        ImpaktfullUiButton(
-          type: ImpaktfullUiButtonType.secondary,
-          title: 'Cancel',
-          onTap: () => Navigator.of(context).pop(),
-        ),
-        ImpaktfullUiButton(
-          type: ImpaktfullUiButtonType.primary,
-          title: 'Add participant',
-          onTap: () async => Navigator.of(context).pop(textController.text),
-        ),
-      ],
-      child: TextField(
-        controller: textController,
-        cursorColor: ThemeColors.primary,
-        decoration: const InputDecoration(
-          hintText: 'Name',
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: ThemeColors.primary,
-              width: 2,
+    return AppThemeLocalizer(
+      builder: (context, theme, localization) => ImpaktfullUiModal(
+        title: localization.dialogRaffleNewParticipantTitle,
+        actions: [
+          ImpaktfullUiButton(
+            type: ImpaktfullUiButtonType.secondary,
+            title: localization.dialogRaffleNewParticipantSecondaryBtn,
+            onTap: () => Navigator.of(context).pop(),
+          ),
+          ImpaktfullUiButton(
+            type: ImpaktfullUiButtonType.primary,
+            title: localization.dialogRaffleNewParticipantPrimaryBtn,
+            onTap: () async => Navigator.of(context).pop(textController.text),
+          ),
+        ],
+        child: TextField(
+          controller: textController,
+          cursorColor: ThemeColors.primary,
+          decoration: InputDecoration(
+            hintText: localization.dialogRaffleNewParticipantInputName,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: ThemeColors.primary,
+                width: 2,
+              ),
             ),
           ),
         ),

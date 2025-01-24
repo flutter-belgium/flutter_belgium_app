@@ -18,7 +18,7 @@ class ForceUpdateScreen extends StatelessWidget {
     return ProviderWidget<ForceUpdateViewModel>(
       create: () => getIt()..init(),
       builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullUiScreen(
-        title: 'Force Update',
+        title: localization.forceUpdateTitle,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: ImpaktfullUiAutoLayout.vertical(
@@ -27,13 +27,13 @@ class ForceUpdateScreen extends StatelessWidget {
             spacing: 8,
             children: [
               Text(
-                'Install the latest version to keep using the app.',
+                localization.forceUpdateBody,
                 style: theme.textStyles.onCanvas.text.small,
                 textAlign: TextAlign.center,
               ),
               ImpaktfullUiButton(
                 type: ImpaktfullUiButtonType.primary,
-                title: 'Update',
+                title: localization.forceUpdateBtn,
                 onTap: viewModel.onUpdateTapped,
               ),
             ],
