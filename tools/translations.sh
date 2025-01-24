@@ -1,6 +1,5 @@
 #!/bin/bash
 
-fvm dart run locale_gen:format
-fvm dart run locale_gen
+fvm dart run impaktfull_translations
 
 ./tools/format.sh

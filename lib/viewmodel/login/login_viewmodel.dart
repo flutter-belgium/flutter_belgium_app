@@ -38,7 +38,7 @@ class LoginViewModel extends ChangeNotifierEx {
       notifyListeners();
       unawaited(_mainNavigator.goToNextOnboardingScreen());
     } catch (error, trace) {
-      _mainNavigator.showError('Failed to open login', error: error, trace: trace);
+      _mainNavigator.showError('Failed to login', error: error, trace: trace);
       _isLoading = false;
       notifyListeners();
     }

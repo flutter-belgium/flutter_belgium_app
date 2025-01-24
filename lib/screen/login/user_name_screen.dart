@@ -17,13 +17,13 @@ class UserNameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<UserNameViewModel>(
       create: () => getIt()..init(),
-      builder: (context, viewModel) => ImpaktfullUiScreen(
-        title: 'What is your name?',
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullUiScreen(
+        title: localization.nameAddTitle,
         bottomChild: ImpaktfullUiBottomActions(
           children: [
             ImpaktfullUiButton(
               type: ImpaktfullUiButtonType.primary,
-              title: 'Save',
+              title: localization.nameAddBtn,
               fullWidth: true,
               onTap: viewModel.onSaveTapped,
             )
@@ -33,7 +33,7 @@ class UserNameScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           children: [
             ImpaktfullUiInputField(
-              label: 'Your name',
+              label: localization.nameAddBtn,
               value: viewModel.userName,
               onChanged: viewModel.onUserNameUpdated,
             ),

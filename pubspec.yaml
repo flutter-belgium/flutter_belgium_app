@@ -35,8 +35,8 @@ dev_dependencies:
   flutter_navigation_generator: ^2.1.0
   injectable_generator: ^2.6.2
   json_serializable: ^6.9.0
-  locale_gen: ^12.1.4
   impaktfull_cli: ^0.15.3
+  impaktfull_translations: ^0.0.4
 
 flutter:
   uses-material-design: true
@@ -54,6 +54,8 @@ flutter:
   shaders:
     - packages/flutter_crazy_fortune_wheel/shaders/sliced_wheel_shader.frag
 
-locale_gen:
+impaktfull_translations:
+  api_key: caca1cf8-fd65-428e-bd5b-8f5e2a3fdf23
+  app_uuid: dec3c25b-20e0-4d83-a9ce-0cc3b34a2bb2
   default_language: "en"
   languages: ["en"]

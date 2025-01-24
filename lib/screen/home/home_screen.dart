@@ -43,28 +43,28 @@ class HomeScreen extends StatelessWidget {
             ImpaktfullUiBottomNavigation(
               items: [
                 ImpaktfullUiBottomNavigationItem(
-                  label: 'Events',
+                  label: localization.homeBottomNavigationEvents,
                   asset: ImpaktfullUiAsset.icon(PhosphorIcons.ticket()),
                   selectedAsset: ImpaktfullUiAsset.icon(PhosphorIcons.ticket(PhosphorIconsStyle.fill)),
                   isSelected: viewModel.index == 0,
                   onTap: () => viewModel.onTapSelected(0),
                 ),
                 // ImpaktfullUiBottomNavigationItem(
-                //   label: 'Talks',
+                //   label: localization.homeBottomNavigationTalks,
                 //   asset: ImpaktfullUiAsset.icon(PhosphorIcons.microphoneStage()),
                 //   selectedAsset: ImpaktfullUiAsset.icon(PhosphorIcons.microphoneStage(PhosphorIconsStyle.fill)),
                 //   isSelected: viewModel.index == 1,
                 //   onTap: () => viewModel.onTapSelected(1),
                 // ),
                 ImpaktfullUiBottomNavigationItem(
-                  label: 'Raffle',
+                  label: localization.homeBottomNavigationRaffle,
                   asset: ImpaktfullUiAsset.icon(PhosphorIcons.ranking()),
                   selectedAsset: ImpaktfullUiAsset.icon(PhosphorIcons.ranking(PhosphorIconsStyle.fill)),
                   isSelected: viewModel.index == 2,
                   onTap: () => viewModel.onTapSelected(2),
                 ),
                 ImpaktfullUiBottomNavigationItem(
-                  label: 'Settings',
+                  label: localization.homeBottomNavigationSettings,
                   asset: ImpaktfullUiAsset.icon(PhosphorIcons.gear()),
                   selectedAsset: ImpaktfullUiAsset.icon(PhosphorIcons.gear(PhosphorIconsStyle.fill)),
                   isSelected: viewModel.index == 3,

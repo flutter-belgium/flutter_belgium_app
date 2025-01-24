@@ -14,22 +14,20 @@ class EventsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<EventsViewmodel>(
       create: () => getIt()..init(),
-      builder: (context, viewModel) {
-        return ImpaktfullUiScreen(
-          title: 'Events',
-          child: ImpaktfullUiListView.builder(
-            items: viewModel.events,
-            spacing: 8,
-            isLoading: viewModel.isLoading,
-            padding: const EdgeInsets.all(16),
-            itemBuilder: (context, item, index) => EventListItem(
-              event: item,
-              onTap: () => viewModel.onEventTap(item),
-            ),
-            noDataLabel: 'No events found',
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullUiScreen(
+        title: localization.eventsListTitle,
+        child: ImpaktfullUiListView.builder(
+          items: viewModel.events,
+          spacing: 8,
+          isLoading: viewModel.isLoading,
+          padding: const EdgeInsets.all(16),
+          itemBuilder: (context, item, index) => EventListItem(
+            event: item,
+            onTap: () => viewModel.onEventTap(item),
           ),
-        );
-      },
+          noDataLabel: localization.eventsListNoData,
+        ),
+      ),
     );
   }
 }

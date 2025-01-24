@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_belgium/theme/app_theme.dart';
 import 'package:flutter_belgium/util/locale/localization.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 class AppThemeLocalizer extends StatelessWidget {
-  final Widget Function(BuildContext context, ImpaktfullUiTheme theme)? builderTheme;
+  final Widget Function(BuildContext context, ImpaktfullUiTheme<AppTheme> theme)? builderTheme;
   final Widget Function(BuildContext context, Localization localization)? builderLocalizations;
-  final Widget Function(BuildContext context, ImpaktfullUiTheme theme, Localization localization)? builder;
+  final Widget Function(BuildContext context, ImpaktfullUiTheme<AppTheme> theme, Localization localization)? builder;
 
   const AppThemeLocalizer({
     this.builder,

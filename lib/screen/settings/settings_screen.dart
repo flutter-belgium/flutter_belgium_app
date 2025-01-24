@@ -13,21 +13,21 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderWidget<SettingsViewmodel>(
       create: () => getIt()..init(),
-      builder: (context, viewModel) => ImpaktfullUiScreen(
-        title: 'Settings',
+      builderWithThemeAndLocalizations: (context, viewModel, theme, localization) => ImpaktfullUiScreen(
+        title: localization.settingsTitle,
         child: ImpaktfullUiListView(
           padding: const EdgeInsets.all(16),
           children: [
             ImpaktfullUiSeparatedColumn(
-              title: 'Account',
+              title: localization.settingsSectionAccount,
               children: [
                 ImpaktfullUiListItem(
                   type: ImpaktfullUiListItemType.danger,
-                  title: 'Delete account',
+                  title: localization.settingsSectionAccountDeleteAccount,
                   onAsyncTap: viewModel.onDeleteAccountTapped,
                 ),
                 ImpaktfullUiListItem(
-                  title: 'Sign out',
+                  title: localization.settingsSectionAccountLogout,
                   onAsyncTap: viewModel.onSignOutTapped,
                 ),
               ],
