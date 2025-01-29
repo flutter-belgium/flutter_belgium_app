@@ -1,26 +1,31 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_belgium/di/injectable.dart';
 import 'package:flutter_belgium/theme/theme_colors.dart';
 import 'package:flutter_belgium/viewmodel/raffle/raffle_winner_picker_viewmodel.dart';
 import 'package:flutter_belgium/widget/general/button.dart';
+import 'package:flutter_belgium/widget/provider/provider_widget.dart';
 import 'package:flutter_belgium/widget/raffle/custom_confetti.dart';
 import 'package:flutter_belgium/widget/raffle/custom_fortune_wheel.dart';
 import 'package:flutter_navigation_generator_annotations/flutter_navigation_generator_annotations.dart';
-import 'package:flutter_belgium/di/injectable.dart';
-import 'package:flutter_belgium/widget/provider/provider_widget.dart';
 import 'package:impaktfull_architecture/impaktfull_architecture.dart';
 
 @FlutterRoute(
   navigationType: NavigationType.push,
 )
-class RaffleWinnerPickerScreen extends StatelessWidget {
+class RaffleWinnerPickerScreen extends StatefulWidget {
   const RaffleWinnerPickerScreen({
     super.key,
   });
 
   @override
+  State<RaffleWinnerPickerScreen> createState() => _RaffleWinnerPickerScreenState();
+}
+
+class _RaffleWinnerPickerScreenState extends State<RaffleWinnerPickerScreen> with SingleTickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
     return ProviderWidget<RaffleWinnerPickerViewModel>(
-      create: () => getIt()..init(),
+      create: () => getIt()..init(this),
       builder: (context, viewModel) => ImpaktfullUiScreen(
         child: Builder(builder: (context) {
           if (viewModel.hasInactiveRaffle) {
@@ -57,7 +62,8 @@ class RaffleWinnerPickerScreen extends StatelessWidget {
                                         );
                                       }
                                       return CustomFortuneWheel(
-                                        selected: viewModel.selectedIndexStream,
+                                        winnerIndex: viewModel.raffleWinnerIndex,
+                                        animation: viewModel.raffleAnimation,
                                         participants: viewModel.participants,
                                       );
                                     },
